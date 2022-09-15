@@ -17,6 +17,7 @@ import {
   TRIP_IN_PROGRESS,
   USER,
 } from "./constants";
+import translate from "./translate";
 
 const Root = () => {
   const state = useContext(StateContext);
@@ -24,7 +25,7 @@ const Root = () => {
   return (
     <Box flex={1} px={5}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <Text>{JSON.stringify(state, null, 2)}</Text>
+      <Text>{JSON.stringify(state)}</Text>
       <Box h={5} />
       <Button
         onPress={() =>
@@ -36,6 +37,8 @@ const Root = () => {
       <Button onPress={state.updateTrips}>Update trips</Button>
       <Box h={5} />
       <Button onPress={state.updateBookings}>Update bookings</Button>
+      <Box h={5} />
+      <Text>{translate.t("test")}</Text>
     </Box>
   );
 };
