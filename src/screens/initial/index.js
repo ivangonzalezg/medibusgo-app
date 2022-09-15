@@ -11,13 +11,14 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
+import styles from "./styles";
 import routes from "../../routes";
 import ambulance from "../../assets/images/ambulance.png";
 import apple from "../../assets/icons/apple.png";
 import facebook from "../../assets/icons/facebook.png";
 import google from "../../assets/icons/google.png";
 import colors from "../../constants/colors";
-import styles from "./styles";
+import translate from "../../translate";
 
 const SocialButton = props => {
   const { children, ...rest } = props;
@@ -49,7 +50,7 @@ const Initial = () => {
         <VStack flex={1} justifyContent="center" alignItems="center" space={5}>
           <VStack>
             <Heading color={colors.titleText} fontSize="3xl">
-              Bienvenido a {"\r\n"} Medibus GO
+              {translate.t("initial.title")}
             </Heading>
           </VStack>
           <Image
@@ -68,11 +69,11 @@ const Initial = () => {
         px={10}
         pt={50}
         borderTopRadius={20}>
-        <Button>Ingresar</Button>
+        <Button>{translate.t("initial.enter")}</Button>
         <HStack alignItems="center" my={30}>
           <Divider flex={1} bg={colors.divider} />
           <Text fontSize="sm" color={colors.lightText} mx={6}>
-            Continuar con
+            {translate.t("initial.continueWith")}
           </Text>
           <Divider flex={1} bg={colors.divider} />
         </HStack>
@@ -110,9 +111,9 @@ const Initial = () => {
           py={2}
           onPress={() => navigation.navigate(routes.test)}>
           <Text>
-            ¿No eres un miembro?{" "}
+            {translate.t("initial.notAMember")}{" "}
             <Text bold color={colors.primary}>
-              Registrate
+              {translate.t("initial.signUp")}
             </Text>
           </Text>
         </Pressable>
