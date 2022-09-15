@@ -22,7 +22,7 @@ export default {
       "Escribe el código que te enviamos a tu número de teléfono",
     enter: "Ingresar",
   },
-  createAccount: {
+  signUpAccount: {
     title: "Crear cuenta",
     enterInfo: "Ingresa los datos requeridos",
     creatingAccount: "Estás creando esta cuenta para:",

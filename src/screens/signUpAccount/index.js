@@ -18,7 +18,7 @@ import mail from "../../assets/icons/mail.png";
 import routes from "../../routes";
 import { validateEmail } from "../../utils";
 
-const CreateAccount = () => {
+const SignUpAccount = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const emailInput = useRef();
@@ -42,11 +42,11 @@ const CreateAccount = () => {
         <ScrollView keyboardShouldPersistTaps="handled">
           <VStack pt={10}>
             <Heading fontSize="2xl" mb={5}>
-              {translate.t("createAccount.title")}
+              {translate.t("signUpAccount.title")}
             </Heading>
-            <Text mb={6}>{translate.t("createAccount.enterInfo")}</Text>
+            <Text mb={6}>{translate.t("signUpAccount.enterInfo")}</Text>
             <Text bold fontSize="xl" mb={5}>
-              {translate.t("createAccount.creatingAccount")}
+              {translate.t("signUpAccount.creatingAccount")}
             </Text>
             <Radio.Group
               flexDirection="row"
@@ -55,17 +55,17 @@ const CreateAccount = () => {
               defaultValue={plan}
               onChange={setPlan}>
               <Radio size="sm" colorScheme="blue" value="personal">
-                <Text>{translate.t("createAccount.personal")}</Text>
+                <Text>{translate.t("signUpAccount.personal")}</Text>
               </Radio>
               <Radio size="sm" colorScheme="blue" value="familiar">
-                <Text>{translate.t("createAccount.familiar")}</Text>
+                <Text>{translate.t("signUpAccount.familiar")}</Text>
               </Radio>
             </Radio.Group>
             <Box h={10} />
             <Input
               py={3}
               mb={5}
-              placeholder={translate.t("createAccount.fullName")}
+              placeholder={translate.t("signUpAccount.fullName")}
               autoCapitalize="words"
               InputLeftElement={
                 <Image
@@ -85,7 +85,7 @@ const CreateAccount = () => {
             <Input
               ref={emailInput}
               py={3}
-              placeholder={translate.t("createAccount.email")}
+              placeholder={translate.t("signUpAccount.email")}
               keyboardType="email-address"
               autoCapitalize="none"
               InputLeftElement={
@@ -106,11 +106,11 @@ const CreateAccount = () => {
           </VStack>
         </ScrollView>
         <Button my={5} disabled={isDisabled} onPress={onContinue}>
-          {translate.t("createAccount.continue")}
+          {translate.t("signUpAccount.continue")}
         </Button>
       </VStack>
     </Container>
   );
 };
 
-export default CreateAccount;
+export default SignUpAccount;

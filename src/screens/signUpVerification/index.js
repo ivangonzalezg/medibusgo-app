@@ -15,7 +15,7 @@ const SignUpVerification = () => {
 
   const onEnter = () =>
     !isDisabled &&
-    navigation.navigate(routes.createAccount, {
+    navigation.navigate(routes.signUpAccount, {
       ...route.params,
       verificationCode,
     });

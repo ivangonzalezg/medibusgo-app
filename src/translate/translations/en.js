@@ -21,7 +21,7 @@ export default {
     typeTheCodeSent: "Type the code we send to your phone number",
     enter: "Sign Up",
   },
-  createAccount: {
+  signUpAccount: {
     title: "Create account",
     enterInfo: "Enter the required data",
     creatingAccount: "You are creating this account to:",
