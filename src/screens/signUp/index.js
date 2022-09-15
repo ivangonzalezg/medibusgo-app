@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Box, Button, Heading, HStack, Input, Text, VStack } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import translate from "../../translate";
@@ -9,12 +9,22 @@ import Container from "../../components/container";
 
 const SignUp = () => {
   const navigation = useNavigation();
+  const phoneInput = useRef();
   const [countryCode, setCountryCode] = useState("52");
   const [phone, setPhone] = useState("");
 
   const countryFlag = getCountryFlag(countryCode);
 
   const isCountryFlag = validateCountryFlag(countryFlag);
+
+  const isDisabled = !isCountryFlag || phone.length < 7;
+
+  const onEnter = () =>
+    !isDisabled &&
+    navigation.navigate(routes.signUpVerification, {
+      countryCode,
+      phone,
+    });
 
   return (
     <Container>
@@ -36,30 +46,27 @@ const SignUp = () => {
             InputLeftElement={<Text ml={3}>{countryFlag} +</Text>}
             value={countryCode}
             onChangeText={setCountryCode}
+            returnKeyType="done"
+            onSubmitEditing={() => isCountryFlag && phoneInput.current.focus()}
           />
           <Input
+            ref={phoneInput}
             keyboardType="number-pad"
             placeholder={translate.t("signUp.phone")}
             flex={1}
             px={5}
             py={4}
             value={phone}
-            onChangeText={setPhone}
+            onChangeText={text => setPhone(text?.replace(/[^0-9]/g, ""))}
+            returnKeyType="done"
+            onSubmitEditing={onEnter}
           />
         </HStack>
         <Box flex={1} />
         <Text color={colors.lighterText} fontSize="sm" textAlign="center">
           {translate.t("signUp.continueToConfirm")}
         </Text>
-        <Button
-          my={5}
-          disabled={!isCountryFlag || phone.length < 7}
-          onPress={() =>
-            navigation.navigate(routes.signUpVerification, {
-              countryCode,
-              phone,
-            })
-          }>
+        <Button my={5} disabled={isDisabled} onPress={onEnter}>
           {translate.t("signUp.enter")}
         </Button>
       </VStack>

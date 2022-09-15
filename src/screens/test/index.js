@@ -1,14 +1,17 @@
 import React, { useContext } from "react";
 import { Box, Button, Text } from "native-base";
+import { useRoute } from "@react-navigation/native";
 import { StateContext } from "../../contexts";
 import translate from "../../translate";
 
 const Test = () => {
+  const route = useRoute();
   const state = useContext(StateContext);
 
   return (
     <Box flex={1} px={5}>
       <Text>{JSON.stringify(state)}</Text>
+      <Text>{JSON.stringify(route)}</Text>
       <Box h={5} />
       <Button
         onPress={() =>
