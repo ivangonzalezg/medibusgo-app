@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useReducer, useState } from "react";
 import SplashScreen from "react-native-splash-screen";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "native-base";
 import { initialState, StateContext, stateReducer } from "./contexts";
@@ -15,8 +15,10 @@ import {
 } from "./constants";
 import routes from "./routes";
 
-import InitialScreen from "./screens/initial";
-import TestScreen from "./screens/test";
+import Test from "./screens/test";
+import Initial from "./screens/initial";
+import SignUp from "./screens/signUp";
+import colors from "./constants/colors";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +27,9 @@ const Root = () => {
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={routes.initial}>
-      <Stack.Screen name={routes.initial} component={InitialScreen} />
-      <Stack.Screen name={routes.test} component={TestScreen} />
+      <Stack.Screen name={routes.initial} component={Initial} />
+      <Stack.Screen name={routes.signUp} component={SignUp} />
+      <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );
 };
@@ -72,7 +75,11 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{
+        dark: false,
+        colors: { ...DefaultTheme.colors, background: colors.white },
+      }}>
       <StateContext.Provider value={stateContext}>
         <StatusBar barStyle="dark-content" backgroundColor="white" />
         <Root />

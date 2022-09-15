@@ -5,7 +5,7 @@ import es from "./translations/es.js";
 
 const languages = ["en", "es"];
 
-const i18n = new I18n(
+const translate = new I18n(
   { en, es },
   {
     defaultLocale: "en",
@@ -15,4 +15,4 @@ const i18n = new I18n(
   },
 );
 
-export default i18n;
+export default translate;

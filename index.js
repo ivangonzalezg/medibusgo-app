@@ -7,6 +7,7 @@ import { AppRegistry, Platform } from "react-native";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import App from "./src/App";
 import { name as appName } from "./app.json";
+import colors from "./src/constants/colors";
 
 const Root = () => {
   return (
@@ -29,10 +30,22 @@ const Root = () => {
           Button: {
             defaultProps: {
               size: "lg",
-              backgroundColor: "#4FAAFF",
+              backgroundColor: colors.primary,
               borderRadius: 8,
               _pressed: { opacity: 80 },
               _disabled: { opacity: 50 },
+            },
+          },
+          Heading: {
+            defaultProps: { color: colors.titleText },
+          },
+          Input: {
+            defaultProps: {
+              variant: "unstyled",
+              size: "lg",
+              borderRadius: 2,
+              backgroundColor: "muted.100",
+              color: colors.inputText,
             },
           },
         },

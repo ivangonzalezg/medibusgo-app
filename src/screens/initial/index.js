@@ -48,11 +48,7 @@ const Initial = () => {
         colors={[colors.startGradient, colors.endGradient]}
         style={styles.linearGradient}>
         <VStack flex={1} justifyContent="center" alignItems="center" space={5}>
-          <VStack>
-            <Heading color={colors.titleText} fontSize="3xl">
-              {translate.t("initial.title")}
-            </Heading>
-          </VStack>
+          <Heading fontSize="3xl">{translate.t("initial.title")}</Heading>
           <Image
             w={200}
             h={200}
@@ -109,7 +105,7 @@ const Initial = () => {
         <Pressable
           alignItems="center"
           py={2}
-          onPress={() => navigation.navigate(routes.test)}>
+          onPress={() => navigation.navigate(routes.signUp)}>
           <Text>
             {translate.t("initial.notAMember")}{" "}
             <Text bold color={colors.primary}>
