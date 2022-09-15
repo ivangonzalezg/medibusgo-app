@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import {
-  Box,
   Button,
   Heading,
   Image,
@@ -30,7 +29,7 @@ const SignUpAccount = () => {
 
   const onContinue = () =>
     !isDisabled &&
-    navigation.navigate(routes.test, {
+    navigation.navigate(routes.signUpPassword, {
       ...route.params,
       fullName,
       email,
@@ -61,9 +60,9 @@ const SignUpAccount = () => {
                 <Text>{translate.t("signUpAccount.familiar")}</Text>
               </Radio>
             </Radio.Group>
-            <Box h={10} />
             <Input
               py={3}
+              mt={10}
               mb={5}
               placeholder={translate.t("signUpAccount.fullName")}
               autoCapitalize="words"

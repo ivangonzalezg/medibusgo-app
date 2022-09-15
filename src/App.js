@@ -21,6 +21,7 @@ import SignUp from "./screens/signUp";
 import colors from "./constants/colors";
 import signUpVerification from "./screens/signUpVerification";
 import SignUpAccount from "./screens/signUpAccount";
+import SignUpPassword from "./screens/signUpPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ const Root = () => {
         component={signUpVerification}
       />
       <Stack.Screen name={routes.signUpAccount} component={SignUpAccount} />
+      <Stack.Screen name={routes.signUpPassword} component={SignUpPassword} />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );

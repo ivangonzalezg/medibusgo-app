@@ -1,5 +1,4 @@
 export default {
-  test: "Prueba",
   initial: {
     title: "Bienvenido a\r\nMedibus GO",
     enter: "Ingresar",
@@ -30,6 +29,13 @@ export default {
     familiar: "Un familiar",
     fullName: "Nombre completo",
     email: "Correo electrónico",
+    continue: "Continuar",
+  },
+  signUpPassword: {
+    title: "Contraseña",
+    createPassword: "Crea tu contraseña",
+    password: "Contraseña",
+    repeatPassword: "Repetir contraseña",
     continue: "Continuar",
   },
 };

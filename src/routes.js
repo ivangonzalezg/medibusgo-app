@@ -3,6 +3,7 @@ const routes = {
   signUp: "sign-up",
   signUpVerification: "sign-up-verification",
   signUpAccount: "sign-up-account",
+  signUpPassword: "sign-up-password",
   home: "home",
   test: "test",
 };
