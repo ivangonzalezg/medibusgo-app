@@ -21,4 +21,14 @@ export default {
     typeTheCodeSent: "Type the code we send to your phone number",
     enter: "Sign Up",
   },
+  createAccount: {
+    title: "Create account",
+    enterInfo: "Enter the required data",
+    creatingAccount: "You are creating this account to:",
+    personal: "Personal use",
+    familiar: "A familiar",
+    fullName: "Full name",
+    email: "Email",
+    continue: "Continue",
+  },
 };

@@ -43,7 +43,7 @@ const Root = () => {
             defaultProps: {
               variant: "unstyled",
               size: "lg",
-              borderRadius: 2,
+              borderRadius: "sm",
               backgroundColor: "muted.100",
               color: colors.inputText,
             },

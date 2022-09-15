@@ -1,3 +1,4 @@
+import * as EmailValidator from "email-validator";
 import countries from "./countries.json";
 
 const noFlag = "⬜";
@@ -9,4 +10,6 @@ const getCountryFlag = (dialCode = "") =>
 
 const validateCountryFlag = (flag = "") => flag !== noFlag;
 
-export { getCountryFlag, validateCountryFlag };
+const validateEmail = (string = "") => EmailValidator.validate(string);
+
+export { getCountryFlag, validateCountryFlag, validateEmail };

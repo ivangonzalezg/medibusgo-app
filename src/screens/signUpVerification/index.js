@@ -15,7 +15,7 @@ const SignUpVerification = () => {
 
   const onEnter = () =>
     !isDisabled &&
-    navigation.navigate(routes.test, {
+    navigation.navigate(routes.createAccount, {
       ...route.params,
       verificationCode,
     });
@@ -23,10 +23,10 @@ const SignUpVerification = () => {
   return (
     <Container>
       <VStack pt={10} px={5} flex={1}>
-        <Heading fontSize="2xl" mb={10}>
+        <Heading fontSize="2xl" mb={5}>
           {translate.t("signUpVerification.title")}
         </Heading>
-        <Text fontSize="xs" mb={2}>
+        <Text fontSize="sm" mb={2}>
           {translate.t("signUpVerification.weSendItTo", route.params)}
         </Text>
         <Input

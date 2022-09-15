@@ -22,4 +22,14 @@ export default {
       "Escribe el código que te enviamos a tu número de teléfono",
     enter: "Ingresar",
   },
+  createAccount: {
+    title: "Crear cuenta",
+    enterInfo: "Ingresa los datos requeridos",
+    creatingAccount: "Estás creando esta cuenta para:",
+    personal: "Uso personal",
+    familiar: "Un familiar",
+    fullName: "Nombre completo",
+    email: "Correo electrónico",
+    continue: "Continuar",
+  },
 };
