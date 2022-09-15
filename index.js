@@ -16,7 +16,7 @@ const Root = () => {
         components: {
           Pressable: {
             defaultProps: {
-              _pressed: { opacity: 70 },
+              _pressed: { opacity: 80 },
               _disabled: { opacity: 50 },
             },
           },
@@ -25,6 +25,15 @@ const Root = () => {
           },
           Switch: {
             defaultProps: { size: Platform.OS === "ios" ? "sm" : "md" },
+          },
+          Button: {
+            defaultProps: {
+              size: "lg",
+              backgroundColor: "#4FAAFF",
+              borderRadius: 8,
+              _pressed: { opacity: 80 },
+              _disabled: { opacity: 50 },
+            },
           },
         },
       })}>

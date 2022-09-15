@@ -1,12 +1,8 @@
-import React, {
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from "react";
-import { Box, Button, StatusBar, Text } from "native-base";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
 import SplashScreen from "react-native-splash-screen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "native-base";
 import { initialState, StateContext, stateReducer } from "./contexts";
 import {
   BOOKINGS,
@@ -17,29 +13,21 @@ import {
   TRIP_IN_PROGRESS,
   USER,
 } from "./constants";
-import translate from "./translate";
+import routes from "./routes";
+
+import InitialScreen from "./screens/initial";
+import TestScreen from "./screens/test";
+
+const Stack = createNativeStackNavigator();
 
 const Root = () => {
-  const state = useContext(StateContext);
-
   return (
-    <Box flex={1} px={5}>
-      <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <Text>{JSON.stringify(state)}</Text>
-      <Box h={5} />
-      <Button
-        onPress={() =>
-          state.updateSessionToken(Math.random().toString(36).slice(2))
-        }>
-        Update session token
-      </Button>
-      <Box h={5} />
-      <Button onPress={state.updateTrips}>Update trips</Button>
-      <Box h={5} />
-      <Button onPress={state.updateBookings}>Update bookings</Button>
-      <Box h={5} />
-      <Text>{translate.t("test")}</Text>
-    </Box>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={routes.initial}>
+      <Stack.Screen name={routes.initial} component={InitialScreen} />
+      <Stack.Screen name={routes.test} component={TestScreen} />
+    </Stack.Navigator>
   );
 };
 
@@ -84,9 +72,12 @@ const App = () => {
   }, []);
 
   return (
-    <StateContext.Provider value={stateContext}>
-      <Root />
-    </StateContext.Provider>
+    <NavigationContainer>
+      <StateContext.Provider value={stateContext}>
+        <StatusBar barStyle="dark-content" backgroundColor="white" />
+        <Root />
+      </StateContext.Provider>
+    </NavigationContainer>
   );
 };
 
