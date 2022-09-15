@@ -8,10 +8,18 @@ export default {
     signUp: "Regístrate",
   },
   signUp: {
-    title: "Escribe tu télefono",
+    title: "Escribe tu número de télefono",
     prefix: "Prefijo",
-    phone: "Teléfono",
+    phone: "Número de eléfono",
     continueToConfirm: "Continúa para recibir una confirmación por SMS",
+    enter: "Ingresar",
+  },
+  signUpVerification: {
+    title: "Código de verificación",
+    weSendItTo: "Te lo enviamos al +%{countryCode} %{phone}",
+    verificationCode: "Código de verificación",
+    typeTheCodeSent:
+      "Escribe el código que te enviamos a tu número de teléfono",
     enter: "Ingresar",
   },
 };
