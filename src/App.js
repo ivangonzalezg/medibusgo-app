@@ -28,7 +28,7 @@ const Root = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={routes.createAccount}>
+      initialRouteName={routes.initial}>
       <Stack.Screen name={routes.initial} component={Initial} />
       <Stack.Screen name={routes.signUp} component={SignUp} />
       <Stack.Screen

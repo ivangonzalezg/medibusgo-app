@@ -1,5 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Box, Button, Heading, HStack, Input, Text, VStack } from "native-base";
+import {
+  Button,
+  Heading,
+  HStack,
+  Input,
+  ScrollView,
+  Text,
+  VStack,
+} from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import translate from "../../translate";
 import { getCountryFlag, validateCountryFlag } from "../../utils";
@@ -28,41 +36,46 @@ const SignUp = () => {
 
   return (
     <Container>
-      <VStack pt={10} px={5} flex={1}>
-        <Heading fontSize="2xl" mb={10}>
-          {translate.t("signUp.title")}
-        </Heading>
-        <Text fontSize="xs" mb={2}>
-          {translate.t("signUp.prefix")}
-        </Text>
-        <HStack space={5}>
-          <Input
-            keyboardType="number-pad"
-            placeholder="52"
-            minWidth={100}
-            maxLength={3}
-            py={4}
-            pl={1}
-            InputLeftElement={<Text ml={3}>{countryFlag} +</Text>}
-            value={countryCode}
-            onChangeText={setCountryCode}
-            returnKeyType="done"
-            onSubmitEditing={() => isCountryFlag && phoneInput.current.focus()}
-          />
-          <Input
-            ref={phoneInput}
-            keyboardType="number-pad"
-            placeholder={translate.t("signUp.phone")}
-            flex={1}
-            px={5}
-            py={4}
-            value={phone}
-            onChangeText={text => setPhone(text?.replace(/[^0-9]/g, ""))}
-            returnKeyType="done"
-            onSubmitEditing={onEnter}
-          />
-        </HStack>
-        <Box flex={1} />
+      <VStack px={5} flex={1}>
+        <ScrollView keyboardShouldPersistTaps="handled">
+          <VStack pt={10}>
+            <Heading fontSize="2xl" mb={10}>
+              {translate.t("signUp.title")}
+            </Heading>
+            <Text fontSize="xs" mb={2}>
+              {translate.t("signUp.prefix")}
+            </Text>
+            <HStack space={5}>
+              <Input
+                keyboardType="number-pad"
+                placeholder="52"
+                minWidth={100}
+                maxLength={3}
+                py={4}
+                pl={1}
+                InputLeftElement={<Text ml={3}>{countryFlag} +</Text>}
+                value={countryCode}
+                onChangeText={setCountryCode}
+                returnKeyType="done"
+                onSubmitEditing={() =>
+                  isCountryFlag && phoneInput.current.focus()
+                }
+              />
+              <Input
+                ref={phoneInput}
+                keyboardType="number-pad"
+                placeholder={translate.t("signUp.phone")}
+                flex={1}
+                px={5}
+                py={4}
+                value={phone}
+                onChangeText={text => setPhone(text?.replace(/[^0-9]/g, ""))}
+                returnKeyType="done"
+                onSubmitEditing={onEnter}
+              />
+            </HStack>
+          </VStack>
+        </ScrollView>
         <Text color={colors.lighterText} fontSize="sm" textAlign="center">
           {translate.t("signUp.continueToConfirm")}
         </Text>
