@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useReducer, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 import SplashScreen from "react-native-splash-screen";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -23,27 +29,41 @@ import signUpVerification from "./screens/signUpVerification";
 import SignUpAccount from "./screens/signUpAccount";
 import SignUpPassword from "./screens/signUpPassword";
 import SignUpSpecialNeeds from "./screens/signUpSpecialNeeds";
+import Home from "./screens/home";
 
 const Stack = createNativeStackNavigator();
 
 const Root = () => {
+  const state = useContext(StateContext);
+
+  // TODO Cambiar para que por defecto sea el login
+  // if (!state.isLoggedIn) {
+  if (state.isLoggedIn) {
+    return (
+      <Stack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName={routes.initial}>
+        <Stack.Screen name={routes.initial} component={Initial} />
+        <Stack.Screen name={routes.signUp} component={SignUp} />
+        <Stack.Screen
+          name={routes.signUpVerification}
+          component={signUpVerification}
+        />
+        <Stack.Screen name={routes.signUpAccount} component={SignUpAccount} />
+        <Stack.Screen name={routes.signUpPassword} component={SignUpPassword} />
+        <Stack.Screen
+          name={routes.signUpSpecialNeeds}
+          component={SignUpSpecialNeeds}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={routes.initial}>
-      {/* initialRouteName={routes.signUpSpecialNeeds}> */}
-      <Stack.Screen name={routes.initial} component={Initial} />
-      <Stack.Screen name={routes.signUp} component={SignUp} />
-      <Stack.Screen
-        name={routes.signUpVerification}
-        component={signUpVerification}
-      />
-      <Stack.Screen name={routes.signUpAccount} component={SignUpAccount} />
-      <Stack.Screen name={routes.signUpPassword} component={SignUpPassword} />
-      <Stack.Screen
-        name={routes.signUpSpecialNeeds}
-        component={SignUpSpecialNeeds}
-      />
+      initialRouteName={routes.home}>
+      <Stack.Screen name={routes.home} component={Home} />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );

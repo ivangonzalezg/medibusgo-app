@@ -6,6 +6,12 @@ const constants = {
   TRIP_IN_PROGRESS: "trip_in_progress",
   TRIPS: "trips",
   BOOKINGS: "bookings",
+  initialRegion: {
+    latitude: 19.432241,
+    longitude: -99.17725,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  },
 };
 
 module.exports = constants;

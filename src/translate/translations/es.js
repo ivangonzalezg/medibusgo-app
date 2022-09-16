@@ -46,4 +46,11 @@ export default {
     detail: "Detalla aquí las necesidades que necesitas",
     continue: "Continuar",
   },
+  home: {
+    title: "Programa tu viaje",
+    whereAreYouGoing: "¿A dónde te diriges?",
+    suggestions: "Sugerencias",
+    callToSchedule: "Llamar para programar",
+    profile: "Perfil",
+  },
 };

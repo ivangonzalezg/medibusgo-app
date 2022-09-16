@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Heading,
@@ -8,23 +8,16 @@ import {
   TextArea,
   VStack,
 } from "native-base";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate from "../../translate";
-import routes from "../../routes";
+import { StateContext } from "../../contexts";
 
 const SignUpSpecialNeeds = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
+  const state = useContext(StateContext);
   const [hasSpecialNeeds, setHasSpecialNeeds] = useState(true);
   const [specialNeeds, setSpecialNeeds] = useState("");
 
-  const onContinue = () =>
-    navigation.navigate(routes.test, {
-      ...route.params,
-      hasSpecialNeeds,
-      specialNeeds,
-    });
+  const onContinue = () => state.updateIsLoggedIn(true);
 
   return (
     <Container>

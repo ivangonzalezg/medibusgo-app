@@ -45,4 +45,11 @@ export default {
     detail: "Detail here the needs you need",
     continue: "Continue",
   },
+  home: {
+    title: "Schedule your trip",
+    whereAreYouGoing: "Where are you going?",
+    suggestions: "Suggestions",
+    callToSchedule: "Call to schedule",
+    profile: "Profile",
+  },
 };

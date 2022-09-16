@@ -3,6 +3,8 @@
     package="com.medibusgo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MainApplication"
@@ -28,6 +30,9 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDaQ46aZ4wMo-EGDr3Mvirz5dVMhyFKVII" />
     </application>
 
 </manifest>
