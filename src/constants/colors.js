@@ -10,6 +10,7 @@ const colors = {
   startGradient: "#D6E5FA",
   endGradient: "#85E0FF",
   white: "#FFFFFF",
+  black: "#000000",
 };
 
 module.exports = colors;

@@ -4,6 +4,7 @@ const routes = {
   signUpVerification: "sign-up-verification",
   signUpAccount: "sign-up-account",
   signUpPassword: "sign-up-password",
+  signUpSpecialNeeds: "sign-up-special-needs",
   home: "home",
   test: "test",
 };

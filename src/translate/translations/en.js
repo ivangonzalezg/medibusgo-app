@@ -37,4 +37,12 @@ export default {
     repeatPassword: "Repeat password",
     continue: "Continue",
   },
+  signUpSpecialNeeds: {
+    title: "Do you have special needs?",
+    yes: "Yes",
+    no: "No",
+    specify: "Specify your special needs",
+    detail: "Detail here the needs you need",
+    continue: "Continue",
+  },
 };

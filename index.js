@@ -48,6 +48,15 @@ const Root = () => {
               color: colors.inputText,
             },
           },
+          TextArea: {
+            defaultProps: {
+              variant: "unstyled",
+              size: "lg",
+              borderRadius: "sm",
+              backgroundColor: "muted.100",
+              color: colors.inputText,
+            },
+          },
         },
       })}>
       <App />

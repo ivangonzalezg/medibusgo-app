@@ -28,7 +28,7 @@ const SignUpPassword = () => {
 
   const onContinue = () =>
     !isDisabled &&
-    navigation.navigate(routes.test, {
+    navigation.navigate(routes.signUpSpecialNeeds, {
       ...route.params,
       password,
       repeatPassword,
@@ -80,7 +80,7 @@ const SignUpPassword = () => {
               }
               value={repeatPassword}
               onChangeText={setRepeatPassword}
-              returnKeyType="next"
+              returnKeyType="done"
               onSubmitEditing={onContinue}
             />
           </VStack>
