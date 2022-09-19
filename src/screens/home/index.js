@@ -47,7 +47,7 @@ const Home = () => {
   const getUserLocation = async () => {
     try {
       const isLocationPermission = await getLocationPermission();
-      if (isLocationPermission) {
+      if (Platform.OS === "android" && isLocationPermission) {
         Geolocation.watchPosition(
           position => {
             map.current.animateCamera({
@@ -55,7 +55,7 @@ const Home = () => {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               },
-              zoom: 17,
+              zoom: 18,
             });
           },
           () => {},
@@ -79,10 +79,7 @@ const Home = () => {
           showsMyLocationButton={false}
           rotateEnabled={false}
           loadingEnabled
-          onMapReady={Platform.select({
-            android: getUserLocation,
-            default: () => {},
-          })}
+          onMapReady={getUserLocation}
         />
         <Pressable
           position="absolute"
