@@ -6,6 +6,7 @@ const routes = {
   signUpPassword: "sign-up-password",
   signUpSpecialNeeds: "sign-up-special-needs",
   home: "home",
+  tripSchedule: "trip-schedule",
   test: "test",
 };
 

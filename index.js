@@ -13,7 +13,7 @@ const Root = () => {
   return (
     <NativeBaseProvider
       theme={extendTheme({
-        config: { useSystemColorMode: true },
+        config: { initialColorMode: "light" },
         components: {
           Pressable: {
             defaultProps: {
@@ -46,6 +46,7 @@ const Root = () => {
               borderRadius: "sm",
               backgroundColor: "muted.100",
               color: colors.inputText,
+              placeholderTextColor: colors.lighterText,
             },
           },
           TextArea: {
@@ -55,6 +56,7 @@ const Root = () => {
               borderRadius: "sm",
               backgroundColor: "muted.100",
               color: colors.inputText,
+              placeholderTextColor: colors.lighterText,
             },
           },
         },

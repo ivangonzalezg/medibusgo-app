@@ -52,4 +52,10 @@ export default {
     callToSchedule: "Call to schedule",
     profile: "Profile",
   },
+  locationsModal: {
+    fromWhere: "From where?",
+    whereAreYouGoing: "Where are you going?",
+    suggestions: "Suggestions",
+    continue: "Continue",
+  },
 };

@@ -9,40 +9,34 @@ import {
   Pressable,
   Stack,
   Text,
+  useDisclose,
   VStack,
 } from "native-base";
 import MapView from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Geolocation from "react-native-geolocation-service";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import translate from "../../translate";
 import constants from "../../constants";
 import colors from "../../constants/colors";
 import location from "../../assets/icons/location.png";
-import health from "../../assets/icons/health.png";
-import arrowRight from "../../assets/icons/arrow-right.png";
 import phone from "../../assets/icons/phone.png";
 import profile from "../../assets/icons/profile.png";
 import { getLocationPermission } from "../../utils";
-
-const data = [
-  {
-    name: "Bird Road | Leon Medical Centers",
-    address: "11501 SW 40th Street Miami, FL 33165",
-  },
-  {
-    name: "Flagler | Leon Medical Centers",
-    address: "7950 NW 2nd Street Miami, FL 33126",
-  },
-  {
-    name: "West Hialeah | Leon Medical Centers",
-    address: "2020 W 64th Street Hialeah, FL 33016",
-  },
-];
+import Suggestion from "../../components/suggestion";
+import LocationsModal from "../../components/locationsModal";
+import routes from "../../routes";
 
 const Home = () => {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const map = useRef();
+  const {
+    isOpen: isLocationsModal,
+    onOpen: onOpenLocationsModal,
+    onClose: onCloseLocationsModal,
+  } = useDisclose(false);
 
   const getUserLocation = async () => {
     try {
@@ -65,6 +59,11 @@ const Home = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const onContinue = () => {
+    onCloseLocationsModal();
+    navigation.navigate(routes.tripSchedule);
   };
 
   return (
@@ -137,56 +136,44 @@ const Home = () => {
         <Heading color={colors.black} fontSize="2xl" mb={5}>
           {translate.t("home.title")}
         </Heading>
-        <HStack alignItems="center" mb={4}>
-          <Image
-            w={25}
-            h={25}
-            resizeMode="contain"
-            source={location}
-            alt="location"
-          />
-          <Pressable flex={1} ml={4} px={4} py={3} bg="muted.100">
-            <Text color={colors.inputText}>
+        <Pressable onPress={onOpenLocationsModal}>
+          <HStack alignItems="center" mb={4}>
+            <Image
+              w={25}
+              h={25}
+              resizeMode="contain"
+              source={location}
+              alt="location"
+            />
+            <Text
+              flex={1}
+              ml={4}
+              px={4}
+              py={3}
+              bg="muted.100"
+              color={colors.inputText}>
               {translate.t("home.whereAreYouGoing")}
             </Text>
-          </Pressable>
-        </HStack>
+          </HStack>
+        </Pressable>
         <Text color={colors.lighterText} mb={4}>
           {translate.t("home.suggestions")}
         </Text>
         <FlatList
-          data={data.slice(0, 3)}
+          data={constants.suggestions.slice(0, 3)}
           renderItem={({ item }) => (
             <Pressable>
-              <HStack alignItems="center">
-                <Image
-                  w={35}
-                  h={35}
-                  resizeMode="contain"
-                  source={health}
-                  alt="health"
-                />
-                <VStack mx={3} flex={1}>
-                  <Text color={colors.titleText} numberOfLines={1}>
-                    {item.name}
-                  </Text>
-                  <Text color={colors.lighterText} numberOfLines={1}>
-                    {item.address}
-                  </Text>
-                </VStack>
-                <Image
-                  w={6}
-                  h={6}
-                  resizeMode="contain"
-                  source={arrowRight}
-                  alt="arrowRight"
-                />
-              </HStack>
+              <Suggestion item={item} />
             </Pressable>
           )}
           ItemSeparatorComponent={() => <Box h={3} />}
         />
       </VStack>
+      <LocationsModal
+        visible={isLocationsModal}
+        onRequestClose={onCloseLocationsModal}
+        onContinue={onContinue}
+      />
     </VStack>
   );
 };

@@ -53,4 +53,10 @@ export default {
     callToSchedule: "Llamar para programar",
     profile: "Perfil",
   },
+  locationsModal: {
+    fromWhere: "¿Desde dónde?",
+    whereAreYouGoing: "¿A dónde te diriges?",
+    suggestions: "Sugerencias",
+    continue: "Continuar",
+  },
 };
