@@ -1,6 +1,7 @@
 import * as EmailValidator from "email-validator";
 import { PermissionsAndroid, Platform } from "react-native";
 import Geolocation from "react-native-geolocation-service";
+import numbro from "numbro";
 import countries from "./countries.json";
 
 const noFlag = "⬜";
@@ -35,9 +36,20 @@ const getLocationPermission = async () => {
   return isLocationPermission;
 };
 
+const formatToCurrency = (number = 0) =>
+  numbro(Math.ceil(number)).format({
+    thousandSeparated: true,
+    prefix: "$",
+  });
+
+const capitalize = (string = "") =>
+  `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
+
 export {
   getCountryFlag,
   validateCountryFlag,
   validateEmail,
   getLocationPermission,
+  formatToCurrency,
+  capitalize,
 };

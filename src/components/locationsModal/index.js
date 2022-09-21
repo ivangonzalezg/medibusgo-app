@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  Animated,
-  Keyboard,
-  Modal,
-  Platform,
-  SafeAreaView,
-} from "react-native";
+import { Animated, Modal, Platform, SafeAreaView } from "react-native";
 import {
   Box,
   Button,
@@ -30,16 +24,10 @@ import Suggestion from "../suggestion";
 import colors from "../../constants/colors";
 
 const LocationsModal = props => {
-  const { visible, onRequestClose } = props;
+  const { visible, onRequestClose, onContinue } = props;
   const insets = useSafeAreaInsets();
   const { isKeyboardVisible } = useKeyboard();
   const [height] = useState(new Animated.Value(0));
-
-  useEffect(() => {
-    if (!visible) {
-      Keyboard.dismiss();
-    }
-  }, [visible]);
 
   useEffect(() => {
     Animated.timing(height, {
@@ -52,7 +40,7 @@ const LocationsModal = props => {
   return (
     <Modal
       transparent
-      animationType="fade"
+      animationType="slide"
       visible={visible}
       onRequestClose={onRequestClose}>
       <KeyboardAvoidingView
@@ -64,9 +52,10 @@ const LocationsModal = props => {
             width="100%"
             height="100%"
             bg="black"
-            opacity={80}
+            opacity={60}
             onPress={onRequestClose}
             zIndex={1}
+            _pressed={{ opacity: 60 }}
           />
           <Box
             flex={1}
@@ -117,14 +106,14 @@ const LocationsModal = props => {
                   keyboardShouldPersistTaps="handled"
                   data={constants.suggestions.slice(0, 3)}
                   renderItem={({ item }) => (
-                    <Pressable onPress={onRequestClose}>
+                    <Pressable onPress={onContinue}>
                       <Suggestion item={item} />
                     </Pressable>
                   )}
                   ItemSeparatorComponent={() => <Box h={3} />}
                 />
               </VStack>
-              <Button mt={3} onPress={onRequestClose}>
+              <Button mt={3} onPress={onContinue}>
                 {translate.t("locationsModal.continue")}
               </Button>
               <Animated.View style={{ height }} />
@@ -139,6 +128,7 @@ const LocationsModal = props => {
 LocationsModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
 };
 
 export default LocationsModal;

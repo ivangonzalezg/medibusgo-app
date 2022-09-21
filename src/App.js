@@ -30,6 +30,7 @@ import SignUpAccount from "./screens/signUpAccount";
 import SignUpPassword from "./screens/signUpPassword";
 import SignUpSpecialNeeds from "./screens/signUpSpecialNeeds";
 import Home from "./screens/home";
+import TripSchedule from "./screens/tripSchedule";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,7 @@ const Root = () => {
       screenOptions={{ headerShown: false }}
       initialRouteName={routes.home}>
       <Stack.Screen name={routes.home} component={Home} />
+      <Stack.Screen name={routes.tripSchedule} component={TripSchedule} />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );
