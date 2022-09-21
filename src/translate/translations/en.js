@@ -77,5 +77,7 @@ export default {
     yes: "Yes",
     no: "No",
     schedule: "Schedule",
+    cancel: "Cancel",
+    confirm: "Confirm",
   },
 };

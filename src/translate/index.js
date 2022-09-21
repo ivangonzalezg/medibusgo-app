@@ -5,14 +5,18 @@ import es from "./translations/es.js";
 
 const languages = ["en", "es"];
 
+const locale = RNLocalize.findBestAvailableLanguage(languages).languageTag;
+
 const translate = new I18n(
   { en, es },
   {
     defaultLocale: "en",
-    locale: RNLocalize.findBestAvailableLanguage(languages).languageTag,
+    locale,
     enableFallback: true,
     missingBehavior: "guess",
   },
 );
 
 export default translate;
+
+export { locale };

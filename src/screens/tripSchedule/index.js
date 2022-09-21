@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Platform } from "react-native";
 import {
   Button,
   ChevronDownIcon,
@@ -15,8 +16,10 @@ import {
   useDisclose,
   VStack,
 } from "native-base";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment";
 import Container from "../../components/container";
-import translate from "../../translate";
+import translate, { locale } from "../../translate";
 import { capitalize, formatToCurrency } from "../../utils";
 import colors from "../../constants/colors";
 import LocationsModal from "../../components/locationsModal";
@@ -30,6 +33,12 @@ const TripSchedule = () => {
     onClose: onCloseLocationsModal,
   } = useDisclose(false);
   const [procedure, setProcedure] = useState("");
+  const {
+    isOpen: isDateTimePicker,
+    onOpen: onOpenDateTimePicker,
+    onClose: onCloseDateTimePicker,
+  } = useDisclose(false);
+  const [date, setDate] = useState(moment().add(1, "h").toDate());
 
   return (
     <Container>
@@ -101,7 +110,8 @@ const TripSchedule = () => {
                   px={2}
                   py={3}
                   borderRadius="sm"
-                  backgroundColor="muted.100">
+                  backgroundColor="muted.100"
+                  onPress={onOpenDateTimePicker}>
                   <HStack alignItems="center" space={2}>
                     <Image
                       w={5}
@@ -111,7 +121,7 @@ const TripSchedule = () => {
                       alt="calendar"
                     />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
-                      {translate.t("tripSchedule.date")}
+                      {moment(date).format("DD MMM, hh:mm A")}
                     </Text>
                     <ChevronDownIcon />
                   </HStack>
@@ -178,6 +188,23 @@ const TripSchedule = () => {
         visible={isLocationsModal}
         onRequestClose={onCloseLocationsModal}
         onContinue={onCloseLocationsModal}
+      />
+      <DateTimePickerModal
+        isVisible={isDateTimePicker}
+        mode="datetime"
+        date={date}
+        minimumDate={moment().add(1, "h").toDate()}
+        onConfirm={_date => {
+          setDate(_date);
+          onCloseDateTimePicker();
+        }}
+        onCancel={onCloseDateTimePicker}
+        display={
+          Platform.OS === "ios" && Number(Platform.Version) >= 14 && "inline"
+        }
+        cancelTextIOS={translate.t("tripSchedule.cancel")}
+        confirmTextIOS={translate.t("tripSchedule.confirm")}
+        locale={locale}
       />
     </Container>
   );
