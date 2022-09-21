@@ -52,10 +52,10 @@ const LocationsModal = props => {
             width="100%"
             height="100%"
             bg="black"
-            opacity={60}
+            opacity={40}
             onPress={onRequestClose}
             zIndex={1}
-            _pressed={{ opacity: 60 }}
+            _pressed={{ opacity: 40 }}
           />
           <Box
             flex={1}

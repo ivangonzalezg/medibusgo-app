@@ -92,7 +92,9 @@ const TripSchedule = () => {
               selectedValue={procedure}
               onValueChange={setProcedure}
               dropdownIcon={<ChevronDownIcon mr={2} />}
-              _actionSheet={{ _backdrop: { _pressed: { opacity: 30 } } }}
+              _actionSheet={{
+                _backdrop: { opacity: 40, _pressed: { opacity: 40 } },
+              }}
               _selectedItem={{ bg: "muted.300" }}>
               {translate.t("tripSchedule.procedures")?.map(_procedure => (
                 <Select.Item
