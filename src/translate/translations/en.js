@@ -87,4 +87,10 @@ export default {
     securityNumber: "Security number",
     addCard: "Add card",
   },
+  bookingConfirmationModal: {
+    title: "Your reservation has been made successfully",
+    description:
+      "Remember to be aware of your notifications to know when your trip begins",
+    continue: "Continue",
+  },
 };

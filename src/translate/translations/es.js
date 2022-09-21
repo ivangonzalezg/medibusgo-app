@@ -88,4 +88,10 @@ export default {
     securityNumber: "Número de seguridad",
     addCard: "Añadir tarjeta",
   },
+  bookingConfirmationModal: {
+    title: "Se ha realizado con éxito tu reserva",
+    description:
+      "Recuerda estar pendiente a tus notificaciones para saber cuando comienza tu servicio",
+    continue: "Continuar",
+  },
 };

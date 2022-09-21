@@ -26,6 +26,7 @@ import LocationsModal from "../../components/locationsModal";
 import calendar from "../../assets/icons/calendar.png";
 import clock from "../../assets/icons/clock.png";
 import AddCardModal from "../../components/addCardModal";
+import BookingConfirmationModal from "../../components/bookingConfirmationModal";
 
 const TripSchedule = () => {
   const {
@@ -44,6 +45,11 @@ const TripSchedule = () => {
     isOpen: isAddCardModal,
     onOpen: onOpenAddCardModal,
     onClose: onCloseAddCardModal,
+  } = useDisclose(false);
+  const {
+    isOpen: isBookingConfirmationModal,
+    onOpen: onOpenBookingConfirmationModal,
+    onClose: onCloseBookingConfirmationModal,
   } = useDisclose(false);
 
   return (
@@ -191,7 +197,9 @@ const TripSchedule = () => {
             </HStack>
           </VStack>
         </ScrollView>
-        <Button my={5}>{translate.t("tripSchedule.schedule")}</Button>
+        <Button my={5} onPress={onOpenBookingConfirmationModal}>
+          {translate.t("tripSchedule.schedule")}
+        </Button>
       </VStack>
       <LocationsModal
         visible={isLocationsModal}
@@ -219,6 +227,11 @@ const TripSchedule = () => {
         visible={isAddCardModal}
         onRequestClose={onCloseAddCardModal}
         onContinue={onCloseAddCardModal}
+      />
+      <BookingConfirmationModal
+        visible={isBookingConfirmationModal}
+        onRequestClose={onCloseBookingConfirmationModal}
+        onContinue={onCloseBookingConfirmationModal}
       />
     </Container>
   );
