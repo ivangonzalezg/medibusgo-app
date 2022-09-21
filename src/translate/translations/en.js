@@ -93,4 +93,10 @@ export default {
       "Remember to be aware of your notifications to know when your trip begins",
     continue: "Continue",
   },
+  inviteToSubscribeModal: {
+    title: "Do you perform procedures very often?",
+    description: "Try our perfect plan for you",
+    normalTrip: "Normal trips",
+    monthlyPlan: "Monthly plan",
+  },
 };

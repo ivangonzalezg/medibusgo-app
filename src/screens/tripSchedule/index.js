@@ -18,6 +18,7 @@ import {
 } from "native-base";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import { useNavigation } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate, { locale } from "../../translate";
 import { capitalize, formatToCurrency } from "../../utils";
@@ -27,8 +28,11 @@ import calendar from "../../assets/icons/calendar.png";
 import clock from "../../assets/icons/clock.png";
 import AddCardModal from "../../components/addCardModal";
 import BookingConfirmationModal from "../../components/bookingConfirmationModal";
+import InviteToSubscribeModal from "../../components/inviteToSubscribeModal";
+import routes from "../../routes";
 
 const TripSchedule = () => {
+  const navigation = useNavigation();
   const {
     isOpen: isLocationsModal,
     onOpen: onOpenLocationsModal,
@@ -50,6 +54,11 @@ const TripSchedule = () => {
     isOpen: isBookingConfirmationModal,
     onOpen: onOpenBookingConfirmationModal,
     onClose: onCloseBookingConfirmationModal,
+  } = useDisclose(false);
+  const {
+    isOpen: isInviteToSubscribeModal,
+    onOpen: onOpenInviteToSubscribeModal,
+    onClose: onCloseInviteToSubscribeModal,
   } = useDisclose(false);
 
   return (
@@ -218,8 +227,17 @@ const TripSchedule = () => {
       />
       <BookingConfirmationModal
         visible={isBookingConfirmationModal}
-        onRequestClose={onCloseBookingConfirmationModal}
-        onContinue={onCloseBookingConfirmationModal}
+        onContinue={() => {
+          onCloseBookingConfirmationModal();
+          onOpenInviteToSubscribeModal();
+        }}
+      />
+      <InviteToSubscribeModal
+        visible={isInviteToSubscribeModal}
+        onContinue={() => {
+          onCloseInviteToSubscribeModal();
+          navigation.navigate(routes.home);
+        }}
       />
     </Container>
   );

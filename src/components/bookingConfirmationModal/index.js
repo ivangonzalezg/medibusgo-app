@@ -18,14 +18,10 @@ import card from "../../assets/icons/card.png";
 import translate from "../../translate";
 
 const BookingConfirmationModal = props => {
-  const { visible, onRequestClose, onContinue } = props;
+  const { visible, onContinue } = props;
 
   return (
-    <Modal
-      transparent
-      animationType="none"
-      visible={visible}
-      onRequestClose={onRequestClose}>
+    <Modal transparent animationType="none" visible={visible}>
       <KeyboardAvoidingView
         behavior={Platform.select({ ios: "padding" })}
         flex={1}>
@@ -75,7 +71,6 @@ const BookingConfirmationModal = props => {
 
 BookingConfirmationModal.propTypes = {
   visible: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
 };
 

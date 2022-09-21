@@ -94,4 +94,10 @@ export default {
       "Recuerda estar pendiente a tus notificaciones para saber cuando comienza tu servicio",
     continue: "Continuar",
   },
+  inviteToSubscribeModal: {
+    title: "Realizas procedimientos muy a seguido?",
+    description: "Prueba nuestro plan perfecto para ti",
+    normalTrip: "Viajes normales",
+    monthlyPlan: "Plan mensual",
+  },
 };
