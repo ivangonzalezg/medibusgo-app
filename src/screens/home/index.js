@@ -90,13 +90,7 @@ const Home = () => {
           py={3}
           px={6}>
           <HStack alignItems="center">
-            <Image
-              w={5}
-              h={5}
-              resizeMode="contain"
-              source={profile}
-              alt="profile"
-            />
+            <Image w={5} h={5} source={profile} alt="profile" />
             <Text color={colors.primaryDark} ml={2}>
               {translate.t("home.profile")}
             </Text>
@@ -111,13 +105,7 @@ const Home = () => {
           shadow={2}
           p={3}>
           <HStack alignItems="center">
-            <Image
-              w={5}
-              h={5}
-              resizeMode="contain"
-              source={phone}
-              alt="phone"
-            />
+            <Image w={5} h={5} source={phone} alt="phone" />
             <Text color={colors.white} ml={2}>
               {translate.t("home.callToSchedule")}
             </Text>
@@ -133,18 +121,12 @@ const Home = () => {
         pb={3}
         mt={-5}
         borderTopRadius={20}>
-        <Heading color={colors.black} fontSize="2xl" mb={5}>
+        <Heading color={colors.black} mb={5}>
           {translate.t("home.title")}
         </Heading>
         <Pressable onPress={onOpenLocationsModal}>
           <HStack alignItems="center" mb={4}>
-            <Image
-              w={25}
-              h={25}
-              resizeMode="contain"
-              source={location}
-              alt="location"
-            />
+            <Image w={25} h={25} source={location} alt="location" />
             <Text
               flex={1}
               ml={4}

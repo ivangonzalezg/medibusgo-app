@@ -39,9 +39,7 @@ const SignUpPassword = () => {
       <VStack px={5} flex={1}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <VStack pt={10}>
-            <Heading fontSize="2xl" mb={5}>
-              {translate.t("signUpPassword.title")}
-            </Heading>
+            <Heading mb={5}>{translate.t("signUpPassword.title")}</Heading>
             <Text mb={50}>{translate.t("signUpPassword.createPassword")}</Text>
             <Input
               py={3}
@@ -49,14 +47,7 @@ const SignUpPassword = () => {
               placeholder={translate.t("signUpPassword.password")}
               secureTextEntry
               InputLeftElement={
-                <Image
-                  w={5}
-                  h={5}
-                  ml={3}
-                  resizeMode="contain"
-                  source={lock}
-                  alt="lock"
-                />
+                <Image w={5} h={5} ml={3} source={lock} alt="lock" />
               }
               value={password}
               onChangeText={setPassword}
@@ -69,14 +60,7 @@ const SignUpPassword = () => {
               placeholder={translate.t("signUpPassword.repeatPassword")}
               secureTextEntry
               InputLeftElement={
-                <Image
-                  w={5}
-                  h={5}
-                  ml={3}
-                  resizeMode="contain"
-                  source={lock}
-                  alt="lock"
-                />
+                <Image w={5} h={5} ml={3} source={lock} alt="lock" />
               }
               value={repeatPassword}
               onChangeText={setRepeatPassword}

@@ -39,9 +39,7 @@ const SignUp = () => {
       <VStack px={5} flex={1}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <VStack pt={10}>
-            <Heading fontSize="2xl" mb={10}>
-              {translate.t("signUp.title")}
-            </Heading>
+            <Heading mb={10}>{translate.t("signUp.title")}</Heading>
             <Text fontSize="xs" mb={2}>
               {translate.t("signUp.prefix")}
             </Text>

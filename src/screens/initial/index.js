@@ -32,7 +32,7 @@ const SocialButton = props => {
       bg={colors.socialButton}
       borderColor={colors.socialButtonBorder}
       borderWidth={1}
-      borderRadius={10}
+      borderRadius="lg"
       {...rest}>
       {children}
     </Pressable>
@@ -49,13 +49,7 @@ const Initial = () => {
         style={styles.linearGradient}>
         <VStack flex={1} justifyContent="center" alignItems="center" space={5}>
           <Heading fontSize="3xl">{translate.t("initial.title")}</Heading>
-          <Image
-            w={200}
-            h={200}
-            resizeMode="contain"
-            source={ambulance}
-            alt="ambulance"
-          />
+          <Image w={200} h={200} source={ambulance} alt="ambulance" />
         </VStack>
       </LinearGradient>
       <VStack
@@ -75,31 +69,13 @@ const Initial = () => {
         </HStack>
         <HStack justifyContent="space-between" mb={30}>
           <SocialButton>
-            <Image
-              w={30}
-              h={30}
-              resizeMode="contain"
-              source={google}
-              alt="google"
-            />
+            <Image w={30} h={30} source={google} alt="google" />
           </SocialButton>
           <SocialButton>
-            <Image
-              w={30}
-              h={30}
-              resizeMode="contain"
-              source={apple}
-              alt="apple"
-            />
+            <Image w={30} h={30} source={apple} alt="apple" />
           </SocialButton>
           <SocialButton>
-            <Image
-              w={30}
-              h={30}
-              resizeMode="contain"
-              source={facebook}
-              alt="facebook"
-            />
+            <Image w={30} h={30} source={facebook} alt="facebook" />
           </SocialButton>
         </HStack>
         <Pressable

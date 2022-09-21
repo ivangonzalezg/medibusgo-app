@@ -24,9 +24,7 @@ const SignUpSpecialNeeds = () => {
       <VStack px={5} flex={1}>
         <ScrollView keyboardShouldPersistTaps="handled" flex={1}>
           <VStack pt={10}>
-            <Heading fontSize="2xl" mb={10}>
-              {translate.t("signUpSpecialNeeds.title")}
-            </Heading>
+            <Heading mb={10}>{translate.t("signUpSpecialNeeds.title")}</Heading>
             <Radio.Group
               flexDirection="row"
               justifyContent="space-evenly"

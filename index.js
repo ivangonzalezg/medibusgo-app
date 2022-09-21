@@ -37,7 +37,7 @@ const Root = () => {
             },
           },
           Heading: {
-            defaultProps: { color: colors.titleText },
+            defaultProps: { color: colors.titleText, fontSize: "2xl" },
           },
           Input: {
             defaultProps: {
@@ -57,6 +57,11 @@ const Root = () => {
               backgroundColor: "muted.100",
               color: colors.inputText,
               placeholderTextColor: colors.lighterText,
+            },
+          },
+          Image: {
+            defaultProps: {
+              resizeMode: "contain",
             },
           },
         },

@@ -25,9 +25,7 @@ const SignUpVerification = () => {
       <VStack px={5} flex={1}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <VStack pt={10}>
-            <Heading fontSize="2xl" mb={5}>
-              {translate.t("signUpVerification.title")}
-            </Heading>
+            <Heading mb={5}>{translate.t("signUpVerification.title")}</Heading>
             <Text fontSize="sm" mb={2}>
               {translate.t("signUpVerification.weSendItTo", route.params)}
             </Text>

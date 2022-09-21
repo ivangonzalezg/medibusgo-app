@@ -65,16 +65,10 @@ const AddCardModal = props => {
             <SafeAreaView style={styles.safeAreaView}>
               <ScrollView keyboardShouldPersistTaps="handled">
                 <HStack mb={10} alignItems="center">
-                  <Heading color="black" flex={1} fontSize="2xl">
+                  <Heading color="black" flex={1}>
                     {translate.t("addCardModal.title")}
                   </Heading>
-                  <Image
-                    w={65}
-                    h={45}
-                    resizeMode="contain"
-                    source={card}
-                    alt="card"
-                  />
+                  <Image w={65} h={45} source={card} alt="card" />
                 </HStack>
                 <Text mb={2}>{translate.t("addCardModal.cardNumber")}</Text>
                 <Input px={4} py={3} mb={5} placeholder="4242424242424242" />

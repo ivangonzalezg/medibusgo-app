@@ -58,7 +58,7 @@ const TripSchedule = () => {
         <ScrollView keyboardShouldPersistTaps="handled">
           <VStack pt={10}>
             <HStack alignItems="center" space={3}>
-              <Heading color="black" flex={1} fontSize="2xl">
+              <Heading color="black" flex={1}>
                 {translate.t("tripSchedule.title")}
               </Heading>
               <Text>{translate.t("tripSchedule.price")}</Text>
@@ -127,13 +127,7 @@ const TripSchedule = () => {
                   backgroundColor="muted.100"
                   onPress={onOpenDateTimePicker}>
                   <HStack alignItems="center" space={2}>
-                    <Image
-                      w={5}
-                      h={5}
-                      resizeMode="contain"
-                      source={calendar}
-                      alt="calendar"
-                    />
+                    <Image w={5} h={5} source={calendar} alt="calendar" />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
                       {moment(date).format("DD MMM, hh:mm A")}
                     </Text>
@@ -149,13 +143,7 @@ const TripSchedule = () => {
                   borderRadius="sm"
                   backgroundColor="muted.100">
                   <HStack alignItems="center" space={2}>
-                    <Image
-                      w={5}
-                      h={5}
-                      resizeMode="contain"
-                      source={clock}
-                      alt="clock"
-                    />
+                    <Image w={5} h={5} source={clock} alt="clock" />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
                       {translate.t("tripSchedule.duration")}
                     </Text>

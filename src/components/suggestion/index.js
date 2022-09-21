@@ -10,7 +10,7 @@ const Suggestion = props => {
 
   return (
     <HStack alignItems="center">
-      <Image w={35} h={35} resizeMode="contain" source={health} alt="health" />
+      <Image w={35} h={35} source={health} alt="health" />
       <VStack mx={3} flex={1}>
         <Text color={colors.titleText} numberOfLines={1}>
           {item.name}
@@ -19,13 +19,7 @@ const Suggestion = props => {
           {item.address}
         </Text>
       </VStack>
-      <Image
-        w={6}
-        h={6}
-        resizeMode="contain"
-        source={arrowRight}
-        alt="arrowRight"
-      />
+      <Image w={6} h={6} source={arrowRight} alt="arrowRight" />
     </HStack>
   );
 };

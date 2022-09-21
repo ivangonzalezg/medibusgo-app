@@ -68,13 +68,7 @@ const LocationsModal = props => {
             <SafeAreaView style={styles.safeAreaView}>
               <VStack flex={1}>
                 <HStack alignItems="center" mb={5}>
-                  <Image
-                    w={25}
-                    h={25}
-                    resizeMode="contain"
-                    source={pin}
-                    alt="pin"
-                  />
+                  <Image w={25} h={25} source={pin} alt="pin" />
                   <Input
                     flex={1}
                     ml={4}
@@ -84,13 +78,7 @@ const LocationsModal = props => {
                   />
                 </HStack>
                 <HStack alignItems="center" mb={5}>
-                  <Image
-                    w={25}
-                    h={25}
-                    resizeMode="contain"
-                    source={location}
-                    alt="location"
-                  />
+                  <Image w={25} h={25} source={location} alt="location" />
                   <Input
                     flex={1}
                     ml={4}

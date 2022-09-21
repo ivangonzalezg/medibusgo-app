@@ -40,9 +40,7 @@ const SignUpAccount = () => {
       <VStack px={5} flex={1}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <VStack pt={10}>
-            <Heading fontSize="2xl" mb={5}>
-              {translate.t("signUpAccount.title")}
-            </Heading>
+            <Heading mb={5}>{translate.t("signUpAccount.title")}</Heading>
             <Text mb={6}>{translate.t("signUpAccount.enterInfo")}</Text>
             <Text bold fontSize="xl" mb={5}>
               {translate.t("signUpAccount.creatingAccount")}
@@ -67,14 +65,7 @@ const SignUpAccount = () => {
               placeholder={translate.t("signUpAccount.fullName")}
               autoCapitalize="words"
               InputLeftElement={
-                <Image
-                  w={5}
-                  h={5}
-                  ml={3}
-                  resizeMode="contain"
-                  source={person}
-                  alt="person"
-                />
+                <Image w={5} h={5} ml={3} source={person} alt="person" />
               }
               value={fullName}
               onChangeText={setFullName}
@@ -88,14 +79,7 @@ const SignUpAccount = () => {
               keyboardType="email-address"
               autoCapitalize="none"
               InputLeftElement={
-                <Image
-                  w={5}
-                  h={5}
-                  ml={3}
-                  resizeMode="contain"
-                  source={mail}
-                  alt="mail"
-                />
+                <Image w={5} h={5} ml={3} source={mail} alt="mail" />
               }
               value={email}
               onChangeText={setEmail}
