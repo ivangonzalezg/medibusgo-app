@@ -21,7 +21,7 @@ import translate from "../../translate";
 import colors from "../../constants/colors";
 
 const InviteToSubscribeModal = props => {
-  const { visible, onContinue } = props;
+  const { visible, onClose, onContinue } = props;
 
   return (
     <Modal transparent animationType="none" visible={visible}>
@@ -50,7 +50,7 @@ const InviteToSubscribeModal = props => {
                     zIndex={1}
                     top={5}
                     right={5}
-                    onPress={onContinue}>
+                    onPress={onClose}>
                     <CloseIcon size={5} />
                   </Pressable>
                   <Image
@@ -116,6 +116,7 @@ const InviteToSubscribeModal = props => {
 
 InviteToSubscribeModal.propTypes = {
   visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
 };
 

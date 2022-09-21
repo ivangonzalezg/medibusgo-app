@@ -99,4 +99,14 @@ export default {
     normalTrip: "Normal trips",
     monthlyPlan: "Monthly plan",
   },
+  subscription: {
+    title: "Book",
+    fromWhere: "From where?",
+    whereAreYouGoing: "Where are you going?",
+    chooseTheDays: "Elige los días que deseas reservar",
+    arrival: "Arrival",
+    departure: "Departure",
+    cancel: "Cancel",
+    create: "Create booking",
+  },
 };

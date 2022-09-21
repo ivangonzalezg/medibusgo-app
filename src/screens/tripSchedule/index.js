@@ -138,7 +138,7 @@ const TripSchedule = () => {
                   <HStack alignItems="center" space={2}>
                     <Image w={5} h={5} source={calendar} alt="calendar" />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
-                      {moment(date).format("DD MMM, hh:mm A")}
+                      {moment(date).format("DD MMM, h:mm A")}
                     </Text>
                     <ChevronDownIcon />
                   </HStack>
@@ -183,7 +183,8 @@ const TripSchedule = () => {
               <Radio.Group
                 flexDirection="row"
                 justifyContent="space-around"
-                alignItems="center">
+                alignItems="center"
+                defaultValue={false}>
                 <Radio size="sm" colorScheme="blue" value={true}>
                   <Text>{translate.t("tripSchedule.yes")}</Text>
                 </Radio>
@@ -234,9 +235,14 @@ const TripSchedule = () => {
       />
       <InviteToSubscribeModal
         visible={isInviteToSubscribeModal}
+        onClose={() => {
+          onCloseInviteToSubscribeModal();
+          navigation.navigate(routes.home);
+        }}
         onContinue={() => {
           onCloseInviteToSubscribeModal();
           navigation.navigate(routes.home);
+          navigation.navigate(routes.subscription);
         }}
       />
     </Container>

@@ -31,6 +31,7 @@ import SignUpPassword from "./screens/signUpPassword";
 import SignUpSpecialNeeds from "./screens/signUpSpecialNeeds";
 import Home from "./screens/home";
 import TripSchedule from "./screens/tripSchedule";
+import Subscription from "./screens/subscription";
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +67,7 @@ const Root = () => {
       initialRouteName={routes.home}>
       <Stack.Screen name={routes.home} component={Home} />
       <Stack.Screen name={routes.tripSchedule} component={TripSchedule} />
+      <Stack.Screen name={routes.subscription} component={Subscription} />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );
