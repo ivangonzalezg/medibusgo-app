@@ -25,6 +25,7 @@ import colors from "../../constants/colors";
 import LocationsModal from "../../components/locationsModal";
 import calendar from "../../assets/icons/calendar.png";
 import clock from "../../assets/icons/clock.png";
+import AddCardModal from "../../components/addCardModal";
 
 const TripSchedule = () => {
   const {
@@ -39,6 +40,11 @@ const TripSchedule = () => {
     onClose: onCloseDateTimePicker,
   } = useDisclose(false);
   const [date, setDate] = useState(moment().add(1, "h").toDate());
+  const {
+    isOpen: isAddCardModal,
+    onOpen: onOpenAddCardModal,
+    onClose: onCloseAddCardModal,
+  } = useDisclose(false);
 
   return (
     <Container>
@@ -158,7 +164,8 @@ const TripSchedule = () => {
               py={3}
               mb={10}
               borderRadius="sm"
-              backgroundColor="muted.100">
+              backgroundColor="muted.100"
+              onPress={onOpenAddCardModal}>
               <HStack alignItems="center" space={2}>
                 <Text flex={1} color={colors.inputText} numberOfLines={1}>
                   {translate.t("tripSchedule.choosePaymentMethod")}
@@ -207,6 +214,11 @@ const TripSchedule = () => {
         cancelTextIOS={translate.t("tripSchedule.cancel")}
         confirmTextIOS={translate.t("tripSchedule.confirm")}
         locale={locale}
+      />
+      <AddCardModal
+        visible={isAddCardModal}
+        onRequestClose={onCloseAddCardModal}
+        onContinue={onCloseAddCardModal}
       />
     </Container>
   );

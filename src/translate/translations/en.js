@@ -80,4 +80,11 @@ export default {
     cancel: "Cancel",
     confirm: "Confirm",
   },
+  addCardModal: {
+    title: "Add card",
+    cardNumber: "Card number",
+    expirationDate: "Expiration date",
+    securityNumber: "Security number",
+    addCard: "Add card",
+  },
 };

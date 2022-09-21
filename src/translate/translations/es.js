@@ -81,4 +81,11 @@ export default {
     cancel: "Cancelar",
     confirm: "Confirmar",
   },
+  addCardModal: {
+    title: "Añadir tarjeta",
+    cardNumber: "Número de tarjeta",
+    expirationDate: "Fecha de expiración",
+    securityNumber: "Número de seguridad",
+    addCard: "Añadir tarjeta",
+  },
 };

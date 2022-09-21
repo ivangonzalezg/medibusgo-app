@@ -4,26 +4,23 @@ import { Animated, Modal, Platform, SafeAreaView } from "react-native";
 import {
   Box,
   Button,
-  FlatList,
+  Heading,
   HStack,
   Image,
   Input,
   KeyboardAvoidingView,
   Pressable,
+  ScrollView,
   Text,
   VStack,
 } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./styles";
-import translate from "../../translate";
-import pin from "../../assets/icons/pin.png";
-import location from "../../assets/icons/location.png";
 import useKeyboard from "../../hooks/useKeyboard";
-import constants from "../../constants";
-import Suggestion from "../suggestion";
-import colors from "../../constants/colors";
+import translate from "../../translate";
+import card from "../../assets/icons/card.png";
 
-const LocationsModal = props => {
+const AddCardModal = props => {
   const { visible, onRequestClose, onContinue } = props;
   const insets = useSafeAreaInsets();
   const { isKeyboardVisible } = useKeyboard();
@@ -66,55 +63,38 @@ const LocationsModal = props => {
             bg="white"
             borderTopRadius={25}>
             <SafeAreaView style={styles.safeAreaView}>
-              <VStack flex={1}>
-                <HStack alignItems="center" mb={5}>
+              <ScrollView keyboardShouldPersistTaps="handled">
+                <HStack mb={10} alignItems="center">
+                  <Heading color="black" flex={1} fontSize="2xl">
+                    {translate.t("addCardModal.title")}
+                  </Heading>
                   <Image
-                    w={25}
-                    h={25}
+                    w={65}
+                    h={45}
                     resizeMode="contain"
-                    source={pin}
-                    alt="pin"
-                  />
-                  <Input
-                    flex={1}
-                    ml={4}
-                    px={4}
-                    py={3}
-                    placeholder={translate.t("locationsModal.fromWhere")}
+                    source={card}
+                    alt="card"
                   />
                 </HStack>
-                <HStack alignItems="center" mb={5}>
-                  <Image
-                    w={25}
-                    h={25}
-                    resizeMode="contain"
-                    source={location}
-                    alt="location"
-                  />
-                  <Input
-                    flex={1}
-                    ml={4}
-                    px={4}
-                    py={3}
-                    placeholder={translate.t("locationsModal.whereAreYouGoing")}
-                  />
+                <Text mb={2}>{translate.t("addCardModal.cardNumber")}</Text>
+                <Input px={4} py={3} mb={5} placeholder="4242424242424242" />
+                <HStack space={5}>
+                  <VStack flex={1}>
+                    <Text mb={2}>
+                      {translate.t("addCardModal.expirationDate")}
+                    </Text>
+                    <Input px={4} py={3} placeholder="MM/YY" />
+                  </VStack>
+                  <VStack flex={1}>
+                    <Text mb={2}>
+                      {translate.t("addCardModal.securityNumber")}
+                    </Text>
+                    <Input px={4} py={3} placeholder="CVV" />
+                  </VStack>
                 </HStack>
-                <Text color={colors.lighterText} mb={3}>
-                  {translate.t("locationsModal.suggestions")}
-                </Text>
-                <FlatList
-                  keyboardShouldPersistTaps="handled"
-                  data={constants.suggestions.slice(0, 3)}
-                  renderItem={({ item }) => (
-                    <Pressable onPress={onContinue}>
-                      <Suggestion item={item} />
-                    </Pressable>
-                  )}
-                  ItemSeparatorComponent={() => <Box h={3} />}
-                />
-              </VStack>
+              </ScrollView>
               <Button mt={3} onPress={onContinue}>
-                {translate.t("locationsModal.continue")}
+                {translate.t("addCardModal.addCard")}
               </Button>
               <Animated.View style={{ height }} />
             </SafeAreaView>
@@ -125,10 +105,10 @@ const LocationsModal = props => {
   );
 };
 
-LocationsModal.propTypes = {
+AddCardModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
 };
 
-export default LocationsModal;
+export default AddCardModal;
