@@ -22,7 +22,7 @@ const SignUpSpecialNeeds = () => {
   return (
     <Container>
       <VStack px={5} flex={1}>
-        <ScrollView keyboardShouldPersistTaps="handled" flex={1}>
+        <ScrollView>
           <VStack pt={10}>
             <Heading mb={10}>{translate.t("signUpSpecialNeeds.title")}</Heading>
             <Radio.Group

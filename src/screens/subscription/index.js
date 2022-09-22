@@ -43,7 +43,7 @@ const Subscription = () => {
   return (
     <Container>
       <VStack px={5} flex={1}>
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView>
           <VStack pt={10} pb={5}>
             <Heading flex={1} mb={5}>
               {translate.t("subscription.title")}

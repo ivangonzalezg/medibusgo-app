@@ -63,7 +63,7 @@ const AddCardModal = props => {
             bg="white"
             borderTopRadius={25}>
             <SafeAreaView style={styles.safeAreaView}>
-              <ScrollView keyboardShouldPersistTaps="handled">
+              <ScrollView>
                 <HStack mb={10} alignItems="center">
                   <Heading color="black" flex={1}>
                     {translate.t("addCardModal.title")}

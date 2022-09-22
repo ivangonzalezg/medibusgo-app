@@ -64,7 +64,7 @@ const TripSchedule = () => {
   return (
     <Container>
       <VStack px={5} flex={1}>
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView>
           <VStack pt={10}>
             <HStack alignItems="center" space={3}>
               <Heading color="black" flex={1}>

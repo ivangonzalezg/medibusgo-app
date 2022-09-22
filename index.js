@@ -64,6 +64,12 @@ const Root = () => {
               resizeMode: "contain",
             },
           },
+          ScrollView: {
+            defaultProps: {
+              showsVerticalScrollIndicator: false,
+              keyboardShouldPersistTaps: "handled",
+            },
+          },
         },
       })}>
       <App />

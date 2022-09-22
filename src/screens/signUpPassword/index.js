@@ -37,7 +37,7 @@ const SignUpPassword = () => {
   return (
     <Container>
       <VStack px={5} flex={1}>
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView>
           <VStack pt={10}>
             <Heading mb={5}>{translate.t("signUpPassword.title")}</Heading>
             <Text mb={50}>{translate.t("signUpPassword.createPassword")}</Text>
