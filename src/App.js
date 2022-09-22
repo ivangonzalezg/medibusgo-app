@@ -8,13 +8,22 @@ import React, {
 import SplashScreen from "react-native-splash-screen";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "native-base";
-import { initialState, StateContext, stateReducer } from "./contexts";
+import { Center, Spinner, StatusBar } from "native-base";
+import {
+  initialLoader,
+  initialState,
+  LoaderContext,
+  loaderReducer,
+  StateContext,
+  stateReducer,
+} from "./contexts";
 import {
   BOOKINGS,
+  HIDE,
   IS_LOGGED_IN,
   IS_TRIP_IN_PROGRESS,
   SESSION_TOKEN,
+  SHOW,
   TRIPS,
   TRIP_IN_PROGRESS,
   USER,
@@ -40,9 +49,7 @@ const Stack = createNativeStackNavigator();
 const Root = () => {
   const state = useContext(StateContext);
 
-  // TODO Cambiar para que por defecto sea el login
-  // if (!state.isLoggedIn) {
-  if (state.isLoggedIn) {
+  if (!state.isLoggedIn) {
     return (
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
@@ -82,6 +89,7 @@ const Root = () => {
 
 const App = () => {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
+  const [loader, dispatchLoader] = useReducer(loaderReducer, initialLoader);
   const [isSplashScreen, setIsSplashScreen] = useState(true);
 
   const stateContext = useMemo(
@@ -100,6 +108,15 @@ const App = () => {
       ...state,
     }),
     [state],
+  );
+
+  const loaderContext = useMemo(
+    () => ({
+      updateUser: user => dispatchState({ type: USER, user }),
+      show: () => dispatchLoader({ type: SHOW }),
+      hide: () => dispatchLoader({ type: HIDE }),
+    }),
+    [],
   );
 
   useEffect(() => {
@@ -126,10 +143,23 @@ const App = () => {
         dark: false,
         colors: { ...DefaultTheme.colors, background: colors.white },
       }}>
-      <StateContext.Provider value={stateContext}>
-        <StatusBar barStyle="dark-content" backgroundColor="white" />
-        <Root />
-      </StateContext.Provider>
+      <LoaderContext.Provider value={loaderContext}>
+        <StateContext.Provider value={stateContext}>
+          <StatusBar barStyle="dark-content" backgroundColor="white" />
+          <Root />
+          {loader.visible && (
+            <Center
+              position="absolute"
+              w="100%"
+              h="100%"
+              bg="black"
+              opacity={60}
+              zIndex={9999}>
+              <Spinner color="white" size="lg" />
+            </Center>
+          )}
+        </StateContext.Provider>
+      </LoaderContext.Provider>
     </NavigationContainer>
   );
 };

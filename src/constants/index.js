@@ -28,6 +28,8 @@ const constants = {
     longitudeDelta: 0.0421,
   },
   suggestions,
+  SHOW: "show",
+  HIDE: "hide",
 };
 
 module.exports = constants;
