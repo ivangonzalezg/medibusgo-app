@@ -44,7 +44,7 @@ const Subscription = () => {
     <Container>
       <VStack px={5} flex={1}>
         <ScrollView keyboardShouldPersistTaps="handled">
-          <VStack pt={10}>
+          <VStack pt={10} pb={5}>
             <Heading flex={1} mb={5}>
               {translate.t("subscription.title")}
             </Heading>
@@ -96,14 +96,14 @@ const Subscription = () => {
                 </Pressable>
                 <Pressable flex={1} py={2} bg="muted.100" borderRadius="lg">
                   <Text textAlign="center" px={1}>
-                    {moment(day.date).format("h:mm A")}
+                    {moment(day.date).format("HH:mm")}
                   </Text>
                 </Pressable>
                 <Pressable flex={1} py={2} bg="muted.100" borderRadius="lg">
                   <Text textAlign="center" px={1}>
                     {moment(day.date)
                       .add(day.duration, "minutes")
-                      .format("h:mm A")}
+                      .format("HH:mm")}
                   </Text>
                 </Pressable>
               </HStack>

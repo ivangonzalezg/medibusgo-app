@@ -12,6 +12,7 @@ const colors = {
   endGradient: "#85E0FF",
   white: "#FFFFFF",
   black: "#000000",
+  cancel: "#E94560",
 };
 
 module.exports = colors;

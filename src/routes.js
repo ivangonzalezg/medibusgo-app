@@ -9,6 +9,7 @@ const routes = {
   tripSchedule: "trip-schedule",
   subscription: "subscription",
   subscriptionConfirmation: "Subscription-confirmation",
+  tripDetails: "trip-details",
   test: "test",
 };
 

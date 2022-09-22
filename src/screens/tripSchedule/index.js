@@ -44,7 +44,7 @@ const TripSchedule = () => {
     onOpen: onOpenDateTimePicker,
     onClose: onCloseDateTimePicker,
   } = useDisclose(false);
-  const [date, setDate] = useState(moment().add(1, "h").toDate());
+  const [date, setDate] = useState(moment().add(1, "hour").toDate());
   const {
     isOpen: isAddCardModal,
     onOpen: onOpenAddCardModal,
@@ -138,7 +138,7 @@ const TripSchedule = () => {
                   <HStack alignItems="center" space={2}>
                     <Image w={5} h={5} source={calendar} alt="calendar" />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
-                      {moment(date).format("DD MMM, h:mm A")}
+                      {moment(date).format("DD MMM, HH:mm")}
                     </Text>
                     <ChevronDownIcon />
                   </HStack>
@@ -208,7 +208,7 @@ const TripSchedule = () => {
         isVisible={isDateTimePicker}
         mode="datetime"
         date={date}
-        minimumDate={moment().add(1, "h").toDate()}
+        minimumDate={moment().add(1, "hour").toDate()}
         onConfirm={_date => {
           setDate(_date);
           onCloseDateTimePicker();
@@ -238,6 +238,7 @@ const TripSchedule = () => {
         onClose={() => {
           onCloseInviteToSubscribeModal();
           navigation.navigate(routes.home);
+          navigation.navigate(routes.tripDetails);
         }}
         onContinue={() => {
           onCloseInviteToSubscribeModal();

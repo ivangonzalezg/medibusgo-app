@@ -11,13 +11,16 @@ import {
   Text,
   VStack,
 } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate from "../../translate";
 import colors from "../../constants/colors";
 import vehicle from "../../assets/images/vehicle.png";
 import card from "../../assets/icons/card.png";
+import routes from "../../routes";
 
 const SubscriptionConfirmation = () => {
+  const navigation = useNavigation();
   const [automaticallyRenew, setAutomaticallyRenew] = useState(true);
 
   return (
@@ -74,7 +77,9 @@ const SubscriptionConfirmation = () => {
               </Text>
             </HStack>
           </Pressable>
-          <Button my={5}>{translate.t("subscriptionConfirmation.pay")}</Button>
+          <Button my={5} onPress={() => navigation.navigate(routes.home)}>
+            {translate.t("subscriptionConfirmation.pay")}
+          </Button>
         </VStack>
       </VStack>
     </Container>

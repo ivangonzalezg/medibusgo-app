@@ -33,6 +33,7 @@ import Home from "./screens/home";
 import TripSchedule from "./screens/tripSchedule";
 import Subscription from "./screens/subscription";
 import SubscriptionConfirmation from "./screens/subscriptionConfirmation";
+import TripDetails from "./screens/tripDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -73,6 +74,7 @@ const Root = () => {
         name={routes.subscriptionConfirmation}
         component={SubscriptionConfirmation}
       />
+      <Stack.Screen name={routes.tripDetails} component={TripDetails} />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );
