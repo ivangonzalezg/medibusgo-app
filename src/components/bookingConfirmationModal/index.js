@@ -25,11 +25,7 @@ const BookingConfirmationModal = props => {
       <KeyboardAvoidingView
         behavior={Platform.select({ ios: "padding" })}
         flex={1}>
-        <HStack
-          flex={1}
-          position="relative"
-          alignItems="center"
-          justifyContent="center">
+        <HStack flex={1} position="relative" justifyContent="center">
           <Box
             position="absolute"
             width="100%"
@@ -49,7 +45,7 @@ const BookingConfirmationModal = props => {
                   <Text textAlign="center">
                     {translate.t("bookingConfirmationModal.description")}
                   </Text>
-                  <HStack my={10} w="full" alignItems="center" space={2}>
+                  <HStack my={10} w="full" space={2}>
                     <Image w={5} h={5} source={card} alt="card" />
                     <Text flex={1} fontSize="sm">
                       Master card •••• 6089

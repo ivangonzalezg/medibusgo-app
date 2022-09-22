@@ -67,7 +67,7 @@ const LocationsModal = props => {
             borderTopRadius={25}>
             <SafeAreaView style={styles.safeAreaView}>
               <VStack flex={1}>
-                <HStack alignItems="center" mb={5}>
+                <HStack mb={5}>
                   <Image w={25} h={25} source={pin} alt="pin" />
                   <Input
                     flex={1}
@@ -77,7 +77,7 @@ const LocationsModal = props => {
                     placeholder={translate.t("locationsModal.fromWhere")}
                   />
                 </HStack>
-                <HStack alignItems="center" mb={5}>
+                <HStack mb={5}>
                   <Image w={25} h={25} source={location} alt="location" />
                   <Input
                     flex={1}

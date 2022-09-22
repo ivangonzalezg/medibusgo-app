@@ -89,7 +89,7 @@ const Home = () => {
           shadow={2}
           py={3}
           px={6}>
-          <HStack alignItems="center">
+          <HStack>
             <Image w={5} h={5} source={profile} alt="profile" />
             <Text color={colors.primaryDark} ml={2}>
               {translate.t("home.profile")}
@@ -104,7 +104,7 @@ const Home = () => {
           borderRadius="xl"
           shadow={2}
           p={3}>
-          <HStack alignItems="center">
+          <HStack>
             <Image w={5} h={5} source={phone} alt="phone" />
             <Text color={colors.white} ml={2}>
               {translate.t("home.callToSchedule")}
@@ -125,7 +125,7 @@ const Home = () => {
           {translate.t("home.title")}
         </Heading>
         <Pressable onPress={onOpenLocationsModal}>
-          <HStack alignItems="center" mb={4}>
+          <HStack mb={4}>
             <Image w={25} h={25} source={location} alt="location" />
             <Text
               flex={1}

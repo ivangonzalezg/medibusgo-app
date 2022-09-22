@@ -44,7 +44,7 @@ const SubscriptionConfirmation = () => {
               />
             </VStack>
             <VStack px={5}>
-              <HStack mb={3} alignItems="center" space={2}>
+              <HStack mb={3} space={2}>
                 <Text flex={1} fontSize="xl">
                   {translate.t("subscriptionConfirmation.total")}
                 </Text>
@@ -52,7 +52,7 @@ const SubscriptionConfirmation = () => {
                 <Text fontSize="xl">$500 USD</Text>
               </HStack>
               <Divider mb={5} />
-              <HStack alignItems="center" space={2}>
+              <HStack space={2}>
                 <Text flex={1}>
                   {translate.t("subscriptionConfirmation.paymentMethod")}
                 </Text>
@@ -66,7 +66,7 @@ const SubscriptionConfirmation = () => {
         </ScrollView>
         <VStack px={5} pt={2}>
           <Pressable onPress={() => setAutomaticallyRenew(!automaticallyRenew)}>
-            <HStack alignItems="center" space={1}>
+            <HStack space={1}>
               <Checkbox
                 isChecked={automaticallyRenew}
                 accessibilityLabel="automaticallyRenew"

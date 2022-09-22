@@ -60,7 +60,7 @@ const Initial = () => {
         pt={50}
         borderTopRadius={20}>
         <Button>{translate.t("initial.enter")}</Button>
-        <HStack alignItems="center" my={30}>
+        <HStack my={30}>
           <Divider flex={1} bg={colors.divider} />
           <Text fontSize="sm" color={colors.lightText} mx={6}>
             {translate.t("initial.continueWith")}

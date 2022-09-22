@@ -9,7 +9,7 @@ const Suggestion = props => {
   const { item } = props;
 
   return (
-    <HStack alignItems="center">
+    <HStack>
       <Image w={35} h={35} source={health} alt="health" />
       <VStack mx={3} flex={1}>
         <Text color={colors.titleText} numberOfLines={1}>

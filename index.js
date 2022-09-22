@@ -22,10 +22,14 @@ const Root = () => {
             },
           },
           Text: {
-            defaultProps: { fontSize: "md" },
+            defaultProps: {
+              fontSize: "md",
+            },
           },
           Switch: {
-            defaultProps: { size: Platform.OS === "ios" ? "sm" : "md" },
+            defaultProps: {
+              size: Platform.OS === "ios" ? "sm" : "md",
+            },
           },
           Button: {
             defaultProps: {
@@ -37,7 +41,10 @@ const Root = () => {
             },
           },
           Heading: {
-            defaultProps: { color: colors.titleText, fontSize: "2xl" },
+            defaultProps: {
+              color: colors.titleText,
+              fontSize: "2xl",
+            },
           },
           Input: {
             defaultProps: {
@@ -68,6 +75,11 @@ const Root = () => {
             defaultProps: {
               showsVerticalScrollIndicator: false,
               keyboardShouldPersistTaps: "handled",
+            },
+          },
+          HStack: {
+            defaultProps: {
+              alignItems: "center",
             },
           },
         },

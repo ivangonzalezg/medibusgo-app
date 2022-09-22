@@ -47,7 +47,7 @@ const TripDetails = () => {
           shadow={2}
           py={3}
           px={6}>
-          <HStack alignItems="center">
+          <HStack>
             <Image w={5} h={5} source={profile} alt="profile" />
             <Text color={colors.primaryDark} ml={2}>
               {translate.t("tripDetails.profile")}
@@ -64,22 +64,22 @@ const TripDetails = () => {
         borderTopRadius={20}>
         <ScrollView>
           <VStack px={5} pt={5} pb={3}>
-            <HStack alignItems="center" mb={5} space={3}>
+            <HStack mb={5} space={3}>
               <Text flex={1} fontSize="xl">
                 {translate.t("tripDetails.scheduledTrips")}
               </Text>
               <Text>{translate.t("tripDetails.price")}</Text>
               <Text fontSize="xl">$50</Text>
             </HStack>
-            <HStack alignItems="center" mb={5}>
+            <HStack mb={5}>
               <VStack flex={1} space={3}>
-                <HStack alignItems="center" space={1}>
+                <HStack space={1}>
                   <Text fontSize="lg" color={colors.titleText} minW={50}>
                     {translate.t("tripDetails.from")}
                   </Text>
                   <Text flex={1}>3315 NW 53rd St</Text>
                 </HStack>
-                <HStack alignItems="center" space={1}>
+                <HStack space={1}>
                   <Text fontSize="lg" color={colors.titleText} minW={50}>
                     {translate.t("tripDetails.to")}
                   </Text>
@@ -87,7 +87,7 @@ const TripDetails = () => {
                 </HStack>
               </VStack>
               <Button variant="unstyled" bg="muted.100" px={5} py={2}>
-                <HStack alignItems="center" space={2}>
+                <HStack space={2}>
                   <Image w={4} h={4} source={edit} alt="edit" />
                   <Text color={colors.titleText}>
                     {translate.t("tripDetails.edit")}
@@ -96,7 +96,7 @@ const TripDetails = () => {
               </Button>
             </HStack>
             <Divider mb={5} />
-            <HStack alignItems="center" mb={5} space={4}>
+            <HStack mb={5} space={4}>
               <VStack flex={1}>
                 <Text color={colors.titleText}>
                   {translate.t("tripDetails.date")}
@@ -120,7 +120,7 @@ const TripDetails = () => {
               </VStack>
             </HStack>
             <Divider mb={5} />
-            <HStack alignItems="center" mb={5} space={10}>
+            <HStack mb={5} space={10}>
               <Text flex={1} fontSize="xl" color={colors.titleText}>
                 {translate.t("tripDetails.vehicle")}
               </Text>
@@ -134,9 +134,9 @@ const TripDetails = () => {
               </VStack>
             </HStack>
             <Divider mb={5} />
-            <HStack alignItems="center">
+            <HStack>
               <VStack flex={1} space={5}>
-                <HStack alignItems="center" space={3}>
+                <HStack space={3}>
                   <Avatar size={45} source={person1} />
                   <VStack>
                     <Text>Daniel López</Text>
@@ -145,7 +145,7 @@ const TripDetails = () => {
                     </Text>
                   </VStack>
                 </HStack>
-                <HStack alignItems="center" space={3}>
+                <HStack space={3}>
                   <Avatar size={45} source={person2} />
                   <VStack>
                     <Text>Lucas Estrada</Text>

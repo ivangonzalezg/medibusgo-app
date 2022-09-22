@@ -48,7 +48,7 @@ const Subscription = () => {
             <Heading flex={1} mb={5}>
               {translate.t("subscription.title")}
             </Heading>
-            <HStack alignItems="center" mb={5}>
+            <HStack mb={5}>
               <Image w={25} h={25} source={pin} alt="pin" />
               <Input
                 flex={1}
@@ -58,7 +58,7 @@ const Subscription = () => {
                 placeholder={translate.t("subscription.fromWhere")}
               />
             </HStack>
-            <HStack alignItems="center" mb={10}>
+            <HStack mb={10}>
               <Image w={25} h={25} source={location} alt="location" />
               <Input
                 flex={1}
@@ -81,9 +81,9 @@ const Subscription = () => {
               </Text>
             </HStack>
             {weekdays.map(day => (
-              <HStack key={day.name} my={2} alignItems="center" space={5}>
+              <HStack key={day.name} my={2} space={5}>
                 <Pressable flex={1} onPress={() => onToggleDay(day.name)}>
-                  <HStack alignItems="center">
+                  <HStack>
                     <Checkbox
                       isChecked={day.selected}
                       accessibilityLabel={day.name}
@@ -110,7 +110,7 @@ const Subscription = () => {
             ))}
           </VStack>
         </ScrollView>
-        <HStack my={3} alignItems="center" space={5}>
+        <HStack my={3} space={5}>
           <Button
             flex={1}
             variant="unstyled"

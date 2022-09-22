@@ -28,11 +28,7 @@ const InviteToSubscribeModal = props => {
       <KeyboardAvoidingView
         behavior={Platform.select({ ios: "padding" })}
         flex={1}>
-        <HStack
-          flex={1}
-          position="relative"
-          alignItems="center"
-          justifyContent="center">
+        <HStack flex={1} position="relative" justifyContent="center">
           <Box
             position="absolute"
             width="100%"

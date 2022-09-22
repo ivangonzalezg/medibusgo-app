@@ -66,7 +66,7 @@ const TripSchedule = () => {
       <VStack px={5} flex={1}>
         <ScrollView>
           <VStack pt={10}>
-            <HStack alignItems="center" space={3}>
+            <HStack space={3}>
               <Heading color="black" flex={1}>
                 {translate.t("tripSchedule.title")}
               </Heading>
@@ -75,7 +75,7 @@ const TripSchedule = () => {
             </HStack>
             <HStack bg="white" shadow={2} m={1} my={10} borderRadius={12}>
               <VStack flex={1} px={3} py={5} space={3}>
-                <HStack alignItems="center" space={1}>
+                <HStack space={1}>
                   <Text color={colors.titleText} minW={50}>
                     {translate.t("tripSchedule.from")}
                   </Text>
@@ -83,7 +83,7 @@ const TripSchedule = () => {
                     3315 NW 53rd St
                   </Text>
                 </HStack>
-                <HStack alignItems="center" space={1}>
+                <HStack space={1}>
                   <Text color={colors.titleText} minW={50}>
                     {translate.t("tripSchedule.to")}
                   </Text>
@@ -135,7 +135,7 @@ const TripSchedule = () => {
                   borderRadius="sm"
                   backgroundColor="muted.100"
                   onPress={onOpenDateTimePicker}>
-                  <HStack alignItems="center" space={2}>
+                  <HStack space={2}>
                     <Image w={5} h={5} source={calendar} alt="calendar" />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
                       {moment(date).format("DD MMM, HH:mm")}
@@ -151,7 +151,7 @@ const TripSchedule = () => {
                   py={3}
                   borderRadius="sm"
                   backgroundColor="muted.100">
-                  <HStack alignItems="center" space={2}>
+                  <HStack space={2}>
                     <Image w={5} h={5} source={clock} alt="clock" />
                     <Text flex={1} color={colors.inputText} numberOfLines={1}>
                       {translate.t("tripSchedule.duration")}
@@ -169,14 +169,14 @@ const TripSchedule = () => {
               borderRadius="sm"
               backgroundColor="muted.100"
               onPress={onOpenAddCardModal}>
-              <HStack alignItems="center" space={2}>
+              <HStack space={2}>
                 <Text flex={1} color={colors.inputText} numberOfLines={1}>
                   {translate.t("tripSchedule.choosePaymentMethod")}
                 </Text>
                 <ChevronRightIcon />
               </HStack>
             </Pressable>
-            <HStack mb={2} alignItems="center" space={5}>
+            <HStack mb={2} space={5}>
               <Text flex={1}>
                 {translate.t("tripSchedule.doYouNeedRoundTrip")}
               </Text>
