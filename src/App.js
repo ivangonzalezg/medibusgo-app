@@ -8,7 +8,7 @@ import React, {
 import SplashScreen from "react-native-splash-screen";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Center, Spinner, StatusBar } from "native-base";
+import { StatusBar } from "native-base";
 import {
   initialLoader,
   initialState,
@@ -29,6 +29,7 @@ import {
   USER,
 } from "./constants";
 import routes from "./routes";
+import Loader from "./components/loader";
 
 import Test from "./screens/test";
 import Initial from "./screens/initial";
@@ -112,8 +113,7 @@ const App = () => {
 
   const loaderContext = useMemo(
     () => ({
-      updateUser: user => dispatchState({ type: USER, user }),
-      show: () => dispatchLoader({ type: SHOW }),
+      show: (message = "") => dispatchLoader({ type: SHOW, message }),
       hide: () => dispatchLoader({ type: HIDE }),
     }),
     [],
@@ -147,17 +147,7 @@ const App = () => {
         <StateContext.Provider value={stateContext}>
           <StatusBar barStyle="dark-content" backgroundColor="white" />
           <Root />
-          {loader.visible && (
-            <Center
-              position="absolute"
-              w="100%"
-              h="100%"
-              bg="black"
-              opacity={60}
-              zIndex={9999}>
-              <Spinner color="white" size="lg" />
-            </Center>
-          )}
+          <Loader visible={loader.visible} message={loader.message} />
         </StateContext.Provider>
       </LoaderContext.Provider>
     </NavigationContainer>

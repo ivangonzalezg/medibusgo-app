@@ -3,7 +3,8 @@ import { SHOW, HIDE } from "../constants";
 
 const initialLoader = {
   visible: false,
-  show: () => {},
+  message: "",
+  show: (message = "") => {},
   hide: () => {},
 };
 
@@ -14,10 +15,12 @@ const loaderReducer = (prevState, action) => {
     case SHOW:
       return {
         visible: true,
+        message: action.message,
       };
     case HIDE:
       return {
         visible: false,
+        message: "",
       };
     default:
       return prevState;

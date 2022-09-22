@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   Button,
   Heading,
@@ -14,11 +14,13 @@ import { getCountryFlag, validateCountryFlag } from "../../utils";
 import colors from "../../constants/colors";
 import routes from "../../routes";
 import Container from "../../components/container";
+import { LoaderContext } from "../../contexts";
 
 const SignUp = () => {
   const navigation = useNavigation();
+  const loader = useContext(LoaderContext);
   const phoneInput = useRef();
-  const [countryCode, setCountryCode] = useState("52");
+  const [countryCode, setCountryCode] = useState("1");
   const [phone, setPhone] = useState("");
 
   const countryFlag = getCountryFlag(countryCode);
@@ -27,12 +29,25 @@ const SignUp = () => {
 
   const isDisabled = !isCountryFlag || phone.length < 7;
 
-  const onEnter = () =>
-    !isDisabled &&
-    navigation.navigate(routes.signUpVerification, {
-      countryCode,
-      phone,
-    });
+  const onEnter = async () => {
+    try {
+      if (isDisabled) {
+        return;
+      }
+      loader.show();
+      // TODO Send message with code to user phone number
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      loader.hide();
+      navigation.navigate(routes.signUpVerification, {
+        countryCode,
+        phone,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // HACK: 2025550153
 
   return (
     <Container>
