@@ -110,4 +110,13 @@ export default {
     cancel: "Cancelar",
     create: "Crear reserva",
   },
+  subscriptionConfirmation: {
+    title: "Suscripción",
+    subtitle: "Suscripción\r\transporte\r\nde procedimentos",
+    total: "Total",
+    price: "Precio",
+    paymentMethod: "Método de pago",
+    automaticallyRenew: "Renovar automáticamente",
+    pay: "Pagar",
+  },
 };

@@ -109,4 +109,13 @@ export default {
     cancel: "Cancel",
     create: "Create booking",
   },
+  subscriptionConfirmation: {
+    title: "Subscription",
+    subtitle: "Subscription\r\ntransport\r\nof procedures",
+    total: "Total",
+    price: "Price",
+    paymentMethod: "Payment method",
+    automaticallyRenew: "Automatically renew",
+    pay: "Pay",
+  },
 };

@@ -13,13 +13,16 @@ import {
   VStack,
 } from "native-base";
 import moment from "moment";
+import { useNavigation } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate from "../../translate";
 import pin from "../../assets/icons/pin.png";
 import location from "../../assets/icons/location.png";
 import { capitalize } from "../../utils";
+import routes from "../../routes";
 
 const Subscription = () => {
+  const navigation = useNavigation();
   const [weekdays, setWeekdays] = useState(
     moment.weekdays(true).map(day => ({
       name: day,
@@ -108,10 +111,20 @@ const Subscription = () => {
           </VStack>
         </ScrollView>
         <HStack my={3} alignItems="center" space={5}>
-          <Button flex={1} bg="muted.100">
+          <Button
+            flex={1}
+            variant="unstyled"
+            bg="muted.100"
+            onPress={navigation.goBack}>
             <Text>{translate.t("subscription.cancel")}</Text>
           </Button>
-          <Button flex={1}>{translate.t("subscription.create")}</Button>
+          <Button
+            flex={1}
+            onPress={() =>
+              navigation.navigate(routes.subscriptionConfirmation)
+            }>
+            {translate.t("subscription.create")}
+          </Button>
         </HStack>
       </VStack>
     </Container>
