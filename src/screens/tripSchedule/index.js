@@ -30,7 +30,7 @@ import AddCardModal from "../../components/addCardModal";
 import BookingConfirmationModal from "../../components/bookingConfirmationModal";
 import InviteToSubscribeModal from "../../components/inviteToSubscribeModal";
 import routes from "../../routes";
-import API, { handleError } from "../../api";
+import API, { GoogleMapsAPI, handleError } from "../../api";
 import { LoaderContext, StateContext } from "../../contexts";
 
 const TripSchedule = () => {
@@ -91,6 +91,21 @@ const TripSchedule = () => {
       }
       let idDirection = origin?.id;
       if (!idDirection) {
+        let latitud = origin.latitud;
+        let longitud = origin.longitud;
+        if (origin.place_id) {
+          const {
+            data: {
+              result: {
+                geometry: { location },
+              },
+            },
+          } = await GoogleMapsAPI.get(
+            `place/details/json?place_id=${origin.place_id}&fields=geometry&language=es`,
+          );
+          latitud = location.lat;
+          longitud = location.lng;
+        }
         const {
           data: {
             resource: [direction],
@@ -102,9 +117,8 @@ const TripSchedule = () => {
               direccion: origin.nombre,
               nombre: origin.nombre,
               direccion2: "Ruta",
-              // TODO Get origin location
-              latitud: 0,
-              longitud: 0,
+              latitud,
+              longitud,
               id_ciudad: 10,
             },
           ],

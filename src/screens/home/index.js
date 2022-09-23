@@ -22,7 +22,7 @@ import styles from "./styles";
 import translate, { locale } from "../../translate";
 import constants from "../../constants";
 import colors from "../../constants/colors";
-import location from "../../assets/icons/location.png";
+import locationIcon from "../../assets/icons/location.png";
 import phone from "../../assets/icons/phone.png";
 import profile from "../../assets/icons/profile.png";
 import { getLocationPermission } from "../../utils";
@@ -37,7 +37,7 @@ const Home = () => {
   const insets = useSafeAreaInsets();
   const state = useContext(StateContext);
   const map = useRef();
-  const [position, setPosition] = useState(null);
+  const [location, setLocation] = useState(null);
   const {
     isOpen: isLocationsModal,
     onOpen: onOpenLocationsModal,
@@ -71,23 +71,45 @@ const Home = () => {
     getSuggestions();
   }, []);
 
+  const getOriginByLocation = async ({ latitude, longitude }) => {
+    try {
+      const {
+        data: {
+          results: [result],
+        },
+      } = await GoogleMapsAPI.get(
+        `/geocode/json?latlng=${latitude},${longitude}`,
+      );
+      if (result) {
+        setOrigin({
+          nombre: result.formatted_address,
+          latitud: latitude,
+          longitud: longitude,
+        });
+      }
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   const getUserLocation = async () => {
     try {
       const isLocationPermission = await getLocationPermission();
       if (isLocationPermission) {
         Geolocation.watchPosition(
           ({ coords }) => {
-            const _position = {
+            const _location = {
               latitude: coords.latitude,
               longitude: coords.longitude,
             };
             if (Platform.OS === "android") {
               map.current.animateCamera({
-                center: _position,
+                center: _location,
                 zoom: 18,
               });
             }
-            setPosition(_position);
+            setLocation(_location);
+            getOriginByLocation(_location);
           },
           () => {},
           { enableHighAccuracy: true },
@@ -110,19 +132,20 @@ const Home = () => {
           input: query,
           language: locale,
           radius: 50000,
-          location: position && `${position.latitude},${position.longitude}`,
+          location: location && `${location.latitude},${location.longitude}`,
           strictbounds: true,
         })}`,
       );
       setOriginSuggestions(
-        predictions.map(prediction => ({ nombre: prediction.description })),
+        predictions.map(prediction => ({
+          nombre: prediction.description,
+          place_id: prediction.place_id,
+        })),
       );
     } catch (error) {
       handleError(error);
     }
   };
-
-  // HACK 3711 Sheridan Ave
 
   const onContinue = () => {
     onCloseLocationsModal();
@@ -193,7 +216,7 @@ const Home = () => {
             onOpenLocationsModal();
           }}>
           <HStack mb={4}>
-            <Image w={25} h={25} source={location} alt="location" />
+            <Image w={25} h={25} source={locationIcon} alt="location" />
             <Text
               flex={1}
               ml={4}
