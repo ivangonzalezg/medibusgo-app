@@ -42,16 +42,17 @@ const BookingConfirmationModal = props => {
                   <Heading textAlign="center" mb={5}>
                     {translate.t("bookingConfirmationModal.title")}
                   </Heading>
-                  <Text textAlign="center">
+                  {/* <Text textAlign="center"> */}
+                  <Text textAlign="center" mb={10}>
                     {translate.t("bookingConfirmationModal.description")}
                   </Text>
-                  <HStack my={10} w="full" space={2}>
+                  {/* <HStack my={10} w="full" space={2}>
                     <Image w={5} h={5} source={card} alt="card" />
                     <Text flex={1} fontSize="sm">
                       Master card •••• 6089
                     </Text>
                     <Text>$50 USD</Text>
-                  </HStack>
+                  </HStack> */}
                   <Button w="full" onPress={onContinue}>
                     {translate.t("bookingConfirmationModal.continue")}
                   </Button>

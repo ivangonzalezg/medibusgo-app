@@ -10,6 +10,7 @@ import {
   Input,
   KeyboardAvoidingView,
   Pressable,
+  Spinner,
   Text,
   VStack,
 } from "native-base";
@@ -19,15 +20,30 @@ import translate from "../../translate";
 import pin from "../../assets/icons/pin.png";
 import location from "../../assets/icons/location.png";
 import useKeyboard from "../../hooks/useKeyboard";
-import constants from "../../constants";
 import Suggestion from "../suggestion";
 import colors from "../../constants/colors";
 
 const LocationsModal = props => {
-  const { visible, onRequestClose, onContinue } = props;
+  const {
+    visible,
+    onRequestClose,
+    onContinue,
+    originSuggestions,
+    destinationSuggestions,
+    origin,
+    destination,
+    onSearchOrigin,
+    onSelectOrigin,
+    onSelectDestination,
+  } = props;
   const insets = useSafeAreaInsets();
   const { isKeyboardVisible } = useKeyboard();
   const [height] = useState(new Animated.Value(0));
+  const [showOriginSuggestions, setShowOriginSuggestions] = useState(false);
+  const [showDestinationSuggestions, setShowDestinationSuggestions] =
+    useState(false);
+  const [originName, setOriginName] = useState("");
+  const [destinationName, setDestinationName] = useState("");
 
   useEffect(() => {
     Animated.timing(height, {
@@ -36,6 +52,19 @@ const LocationsModal = props => {
       duration: 250,
     }).start();
   }, [isKeyboardVisible]);
+
+  useEffect(() => {
+    setOriginName(origin?.nombre || "");
+  }, [origin]);
+
+  useEffect(() => {
+    setDestinationName(destination?.nombre || "");
+  }, [destination]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => onSearchOrigin(originName), 500);
+    return () => clearTimeout(timeout);
+  }, [originName]);
 
   return (
     <Modal
@@ -74,7 +103,15 @@ const LocationsModal = props => {
                     ml={4}
                     px={4}
                     py={3}
+                    returnKeyType="search"
                     placeholder={translate.t("locationsModal.fromWhere")}
+                    value={originName}
+                    onChangeText={setOriginName}
+                    onFocus={() => {
+                      setShowOriginSuggestions(true);
+                      setShowDestinationSuggestions(false);
+                    }}
+                    onBlur={() => setShowOriginSuggestions(false)}
                   />
                 </HStack>
                 <HStack mb={5}>
@@ -84,22 +121,48 @@ const LocationsModal = props => {
                     ml={4}
                     px={4}
                     py={3}
+                    returnKeyType="search"
                     placeholder={translate.t("locationsModal.whereAreYouGoing")}
+                    value={destinationName}
+                    onChangeText={setDestinationName}
+                    onFocus={() => {
+                      setShowOriginSuggestions(false);
+                      setShowDestinationSuggestions(true);
+                    }}
+                    onBlur={() => setShowDestinationSuggestions(false)}
                   />
                 </HStack>
-                <Text color={colors.lighterText} mb={3}>
-                  {translate.t("locationsModal.suggestions")}
-                </Text>
-                <FlatList
-                  keyboardShouldPersistTaps="handled"
-                  data={constants.suggestions.slice(0, 3)}
-                  renderItem={({ item }) => (
-                    <Pressable onPress={onContinue}>
-                      <Suggestion item={item} />
-                    </Pressable>
-                  )}
-                  ItemSeparatorComponent={() => <Box h={3} />}
-                />
+                {(showOriginSuggestions || showDestinationSuggestions) && (
+                  <FlatList
+                    keyboardShouldPersistTaps="handled"
+                    data={
+                      showOriginSuggestions
+                        ? originSuggestions
+                        : destinationSuggestions
+                    }
+                    renderItem={({ item }) => (
+                      <Pressable
+                        onPress={() => {
+                          if (showOriginSuggestions) {
+                            onSelectOrigin(item);
+                          } else {
+                            onSelectDestination(item);
+                          }
+                          setShowOriginSuggestions(false);
+                          setShowDestinationSuggestions(false);
+                        }}>
+                        <Suggestion name={item.nombre} />
+                      </Pressable>
+                    )}
+                    ItemSeparatorComponent={() => <Box h={3} />}
+                    ListHeaderComponent={() => (
+                      <Text color={colors.lighterText} mb={3}>
+                        {translate.t("locationsModal.suggestions")}
+                      </Text>
+                    )}
+                    ListEmptyComponent={Spinner}
+                  />
+                )}
               </VStack>
               <Button mt={3} onPress={onContinue}>
                 {translate.t("locationsModal.continue")}
@@ -117,6 +180,23 @@ LocationsModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
+  originSuggestions: PropTypes.array,
+  destinationSuggestions: PropTypes.array,
+  origin: PropTypes.object,
+  destination: PropTypes.object,
+  onSearchOrigin: PropTypes.func,
+  onSelectOrigin: PropTypes.func,
+  onSelectDestination: PropTypes.func,
+};
+
+LocationsModal.defaultProps = {
+  originSuggestions: [],
+  destinationSuggestions: [],
+  origin: {},
+  destination: {},
+  onSearchOrigin: () => {},
+  onSelectOrigin: () => {},
+  onSelectDestination: () => {},
 };
 
 export default LocationsModal;

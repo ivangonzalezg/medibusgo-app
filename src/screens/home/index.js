@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Platform } from "react-native";
 import {
   Box,
@@ -7,6 +7,7 @@ import {
   HStack,
   Image,
   Pressable,
+  Spinner,
   Stack,
   Text,
   useDisclose,
@@ -16,8 +17,9 @@ import MapView from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Geolocation from "react-native-geolocation-service";
 import { useNavigation } from "@react-navigation/native";
+import qs from "qs";
 import styles from "./styles";
-import translate from "../../translate";
+import translate, { locale } from "../../translate";
 import constants from "../../constants";
 import colors from "../../constants/colors";
 import location from "../../assets/icons/location.png";
@@ -27,43 +29,104 @@ import { getLocationPermission } from "../../utils";
 import Suggestion from "../../components/suggestion";
 import LocationsModal from "../../components/locationsModal";
 import routes from "../../routes";
+import API, { GoogleMapsAPI, handleError } from "../../api";
+import { StateContext } from "../../contexts";
 
 const Home = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const state = useContext(StateContext);
   const map = useRef();
+  const [position, setPosition] = useState(null);
   const {
     isOpen: isLocationsModal,
     onOpen: onOpenLocationsModal,
     onClose: onCloseLocationsModal,
   } = useDisclose(false);
+  const [originSuggestions, setOriginSuggestions] = useState([]);
+  const [destinationSuggestions, setDestinationSuggestions] = useState([]);
+  const [origin, setOrigin] = useState({});
+  const [destination, setDestination] = useState({});
+
+  const getSuggestions = async () => {
+    try {
+      const {
+        data: { resource: _originSuggestions },
+      } = await API(state.sessionToken).get(
+        `/airlinku/_table/direccion?filter=(id_usuario=${state.user.id})`,
+      );
+      const {
+        data: { resource: _destinationSuggestions },
+      } = await API(state.sessionToken).get(
+        `/airlinku/_table/ubicacion?filter=(id_universidad=${state.user.id_universidad})AND(id_tipo_ubicacion=1)AND(eliminado is null)AND(habilitado=1)`,
+      );
+      setOriginSuggestions(_originSuggestions);
+      setDestinationSuggestions(_destinationSuggestions);
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  useEffect(() => {
+    getSuggestions();
+  }, []);
 
   const getUserLocation = async () => {
     try {
       const isLocationPermission = await getLocationPermission();
-      if (Platform.OS === "android" && isLocationPermission) {
+      if (isLocationPermission) {
         Geolocation.watchPosition(
-          position => {
-            map.current.animateCamera({
-              center: {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-              },
-              zoom: 18,
-            });
+          ({ coords }) => {
+            const _position = {
+              latitude: coords.latitude,
+              longitude: coords.longitude,
+            };
+            if (Platform.OS === "android") {
+              map.current.animateCamera({
+                center: _position,
+                zoom: 18,
+              });
+            }
+            setPosition(_position);
           },
           () => {},
           { enableHighAccuracy: true },
         );
       }
     } catch (error) {
-      console.error(error);
+      handleError(error);
     }
   };
 
+  const onSearchOrigin = async query => {
+    try {
+      if (!query) {
+        return;
+      }
+      const {
+        data: { predictions },
+      } = await GoogleMapsAPI.get(
+        `/place/autocomplete/json?${qs.stringify({
+          input: query,
+          language: locale,
+          radius: 50000,
+          location: position && `${position.latitude},${position.longitude}`,
+          strictbounds: true,
+        })}`,
+      );
+      setOriginSuggestions(
+        predictions.map(prediction => ({ nombre: prediction.description })),
+      );
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  // HACK 3711 Sheridan Ave
+
   const onContinue = () => {
     onCloseLocationsModal();
-    navigation.navigate(routes.tripSchedule);
+    navigation.navigate(routes.tripSchedule, { origin, destination });
   };
 
   return (
@@ -124,7 +187,11 @@ const Home = () => {
         <Heading color={colors.black} mb={5}>
           {translate.t("home.title")}
         </Heading>
-        <Pressable onPress={onOpenLocationsModal}>
+        <Pressable
+          onPress={() => {
+            setDestination({});
+            onOpenLocationsModal();
+          }}>
           <HStack mb={4}>
             <Image w={25} h={25} source={location} alt="location" />
             <Text
@@ -142,19 +209,33 @@ const Home = () => {
           {translate.t("home.suggestions")}
         </Text>
         <FlatList
-          data={constants.suggestions.slice(0, 3)}
+          maxH={200}
+          data={destinationSuggestions}
           renderItem={({ item }) => (
-            <Pressable>
-              <Suggestion item={item} />
+            <Pressable
+              onPress={() => {
+                setDestination(item);
+                onOpenLocationsModal();
+              }}>
+              <Suggestion name={item.nombre} />
             </Pressable>
           )}
+          keyExtractor={item => item.id}
           ItemSeparatorComponent={() => <Box h={3} />}
+          ListEmptyComponent={Spinner}
         />
       </VStack>
       <LocationsModal
         visible={isLocationsModal}
         onRequestClose={onCloseLocationsModal}
         onContinue={onContinue}
+        originSuggestions={originSuggestions}
+        destinationSuggestions={destinationSuggestions}
+        origin={origin}
+        destination={destination}
+        onSearchOrigin={onSearchOrigin}
+        onSelectOrigin={setOrigin}
+        onSelectDestination={setDestination}
       />
     </VStack>
   );

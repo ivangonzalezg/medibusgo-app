@@ -133,9 +133,9 @@ const App = () => {
       const sessionToken = await AsyncStorage.getItem(SESSION_TOKEN);
       const user = await AsyncStorage.getItem(USER);
       if (sessionToken) {
-        dispatchState({ type: IS_LOGGED_IN, isLoggedIn: true });
         dispatchState({ type: SESSION_TOKEN, sessionToken });
         dispatchState({ type: USER, user: JSON.parse(user) });
+        dispatchState({ type: IS_LOGGED_IN, isLoggedIn: true });
       }
       setIsSplashScreen(false);
     } catch (error) {

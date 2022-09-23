@@ -78,7 +78,7 @@ const InviteToSubscribeModal = props => {
                         <Text color={colors.primary}>
                           {translate.t("inviteToSubscribeModal.normalTrip")}
                         </Text>
-                        <Text color={colors.primary}>$50</Text>
+                        <Text color={colors.primary}>$0</Text>
                       </VStack>
                     </Pressable>
                     <Pressable
@@ -96,7 +96,7 @@ const InviteToSubscribeModal = props => {
                         <Text color="white">
                           {translate.t("inviteToSubscribeModal.monthlyPlan")}
                         </Text>
-                        <Text color="white">$500</Text>
+                        <Text color="white">$0</Text>
                       </VStack>
                     </Pressable>
                   </HStack>

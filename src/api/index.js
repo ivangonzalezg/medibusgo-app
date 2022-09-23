@@ -26,6 +26,11 @@ function handleError(error = new Error("Error")) {
   }
 }
 
+const GoogleMapsAPI = axios.create({
+  baseURL: "https://maps.googleapis.com/maps/api",
+  params: { key: "AIzaSyAzCA_xy3p9W11BaTfOZq7xVH6mq1EYYYE" },
+});
+
 export default API;
 
-export { handleError };
+export { handleError, GoogleMapsAPI };

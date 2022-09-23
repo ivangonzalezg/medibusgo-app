@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Platform } from "react-native";
 import {
   Button,
@@ -18,7 +18,7 @@ import {
 } from "native-base";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate, { locale } from "../../translate";
 import { capitalize, formatToCurrency } from "../../utils";
@@ -30,9 +30,15 @@ import AddCardModal from "../../components/addCardModal";
 import BookingConfirmationModal from "../../components/bookingConfirmationModal";
 import InviteToSubscribeModal from "../../components/inviteToSubscribeModal";
 import routes from "../../routes";
+import API, { handleError } from "../../api";
+import { LoaderContext, StateContext } from "../../contexts";
 
 const TripSchedule = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { origin, destination } = route.params;
+  const state = useContext(StateContext);
+  const loader = useContext(LoaderContext);
   const {
     isOpen: isLocationsModal,
     onOpen: onOpenLocationsModal,
@@ -44,12 +50,15 @@ const TripSchedule = () => {
     onOpen: onOpenDateTimePicker,
     onClose: onCloseDateTimePicker,
   } = useDisclose(false);
-  const [date, setDate] = useState(moment().add(1, "hour").toDate());
+  const [date, setDate] = useState(
+    moment().startOf("hour").add(1, "hour").toDate(),
+  );
   const {
     isOpen: isAddCardModal,
     onOpen: onOpenAddCardModal,
     onClose: onCloseAddCardModal,
   } = useDisclose(false);
+  const [isRoundTrip, setIsRoundTrip] = useState(false);
   const {
     isOpen: isBookingConfirmationModal,
     onOpen: onOpenBookingConfirmationModal,
@@ -61,6 +70,66 @@ const TripSchedule = () => {
     onClose: onCloseInviteToSubscribeModal,
   } = useDisclose(false);
 
+  const onSchedule = async () => {
+    try {
+      loader.show();
+      const {
+        data: {
+          resource: [service],
+        },
+      } = await API(state.sessionToken).get(
+        `/airlinku/_table/servicio?filter=(id_ubicacion_destino=${
+          destination.id
+        })AND(en_destino_esperado>=${moment(date)
+          .subtract(1, "hour")
+          .format("Y-MM-DD HH:mm:ss")})AND(en_destino_esperado<=${moment(
+          date,
+        ).format("Y-MM-DD HH:mm:ss")})`,
+      );
+      if (!service) {
+        throw new Error("No service");
+      }
+      let idDirection = origin?.id;
+      if (!idDirection) {
+        const {
+          data: {
+            resource: [direction],
+          },
+        } = await API(state.sessionToken).post("/airlinku/_table/direccion", {
+          resource: [
+            {
+              id_usuario: state.user.id,
+              direccion: origin.nombre,
+              nombre: origin.nombre,
+              direccion2: "Ruta",
+              // TODO Get origin location
+              latitud: 0,
+              longitud: 0,
+              id_ciudad: 10,
+            },
+          ],
+        });
+        idDirection = direction.id;
+      }
+      await API(state.sessionToken).post("/airlinku/_table/reserva", {
+        resource: [
+          {
+            id_usuario: state.user.id,
+            id_servicio: service.id,
+            id_direccion: idDirection,
+            creado_por: state.user.user_id,
+            actualizado_por: state.user.user_id,
+          },
+        ],
+      });
+      loader.hide();
+      onOpenBookingConfirmationModal();
+    } catch (error) {
+      loader.hide();
+      handleError(error);
+    }
+  };
+
   return (
     <Container>
       <VStack px={5} flex={1}>
@@ -71,7 +140,7 @@ const TripSchedule = () => {
                 {translate.t("tripSchedule.title")}
               </Heading>
               <Text>{translate.t("tripSchedule.price")}</Text>
-              <Text fontSize="2xl">{formatToCurrency(50)}</Text>
+              <Text fontSize="2xl">{formatToCurrency(0)}</Text>
             </HStack>
             <HStack bg="white" shadow={2} m={1} my={10} borderRadius={12}>
               <VStack flex={1} px={3} py={5} space={3}>
@@ -80,7 +149,7 @@ const TripSchedule = () => {
                     {translate.t("tripSchedule.from")}
                   </Text>
                   <Text flex={1} color={colors.lighterText}>
-                    3315 NW 53rd St
+                    {origin.nombre}
                   </Text>
                 </HStack>
                 <HStack space={1}>
@@ -88,7 +157,7 @@ const TripSchedule = () => {
                     {translate.t("tripSchedule.to")}
                   </Text>
                   <Text flex={1} color={colors.lighterText}>
-                    Bird Road | Leon Medical Centers
+                    {destination.nombre}
                   </Text>
                 </HStack>
               </VStack>
@@ -184,7 +253,8 @@ const TripSchedule = () => {
                 flexDirection="row"
                 justifyContent="space-around"
                 alignItems="center"
-                defaultValue={false}>
+                defaultValue={isRoundTrip}
+                onChange={setIsRoundTrip}>
                 <Radio size="sm" colorScheme="blue" value={true}>
                   <Text>{translate.t("tripSchedule.yes")}</Text>
                 </Radio>
@@ -195,7 +265,7 @@ const TripSchedule = () => {
             </HStack>
           </VStack>
         </ScrollView>
-        <Button my={5} onPress={onOpenBookingConfirmationModal}>
+        <Button my={5} onPress={onSchedule}>
           {translate.t("tripSchedule.schedule")}
         </Button>
       </VStack>
@@ -220,6 +290,7 @@ const TripSchedule = () => {
         cancelTextIOS={translate.t("tripSchedule.cancel")}
         confirmTextIOS={translate.t("tripSchedule.confirm")}
         locale={locale}
+        minuteInterval={10}
       />
       <AddCardModal
         visible={isAddCardModal}
