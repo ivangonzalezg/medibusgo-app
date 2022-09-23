@@ -10,6 +10,7 @@ const routes = {
   subscription: "subscription",
   subscriptionConfirmation: "Subscription-confirmation",
   tripDetails: "trip-details",
+  signIn: "sign-in",
   test: "test",
 };
 

@@ -8,16 +8,17 @@ import {
   TextArea,
   VStack,
 } from "native-base";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate from "../../translate";
-import { LoaderContext, StateContext } from "../../contexts";
+import { LoaderContext } from "../../contexts";
 import API, { handleError } from "../../api";
+import routes from "../../routes";
 
 const SignUpSpecialNeeds = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const { email, password, fullName, phone } = route.params;
-  const state = useContext(StateContext);
   const loader = useContext(LoaderContext);
   const [hasSpecialNeeds, setHasSpecialNeeds] = useState(true);
   const [specialNeeds, setSpecialNeeds] = useState("");
@@ -34,7 +35,8 @@ const SignUpSpecialNeeds = () => {
         phone,
       });
       loader.hide();
-      state.updateIsLoggedIn(true);
+      navigation.navigate(routes.initial);
+      navigation.navigate(routes.signIn);
     } catch (error) {
       loader.hide();
       handleError(error);

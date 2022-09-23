@@ -59,7 +59,9 @@ const Initial = () => {
         px={10}
         pt={50}
         borderTopRadius={20}>
-        <Button>{translate.t("initial.enter")}</Button>
+        <Button onPress={() => navigation.navigate(routes.signIn)}>
+          {translate.t("initial.enter")}
+        </Button>
         <HStack my={30}>
           <Divider flex={1} bg={colors.divider} />
           <Text fontSize="sm" color={colors.lightText} mx={6}>
@@ -68,13 +70,13 @@ const Initial = () => {
           <Divider flex={1} bg={colors.divider} />
         </HStack>
         <HStack justifyContent="space-between" mb={30}>
-          <SocialButton>
+          <SocialButton onPress={() => navigation.navigate(routes.signIn)}>
             <Image w={30} h={30} source={google} alt="google" />
           </SocialButton>
-          <SocialButton>
+          <SocialButton onPress={() => navigation.navigate(routes.signIn)}>
             <Image w={30} h={30} source={apple} alt="apple" />
           </SocialButton>
-          <SocialButton>
+          <SocialButton onPress={() => navigation.navigate(routes.signIn)}>
             <Image w={30} h={30} source={facebook} alt="facebook" />
           </SocialButton>
         </HStack>

@@ -44,7 +44,7 @@ const StateContext = createContext({
 const stateReducer = (prevState, action) => {
   switch (action.type) {
     case USER:
-      AsyncStorage.setItem(SESSION_TOKEN, JSON.stringify(action.user));
+      AsyncStorage.setItem(USER, JSON.stringify(action.user));
       return {
         ...prevState,
         user: action.user,

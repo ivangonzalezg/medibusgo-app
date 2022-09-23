@@ -9,6 +9,7 @@ import SplashScreen from "react-native-splash-screen";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "native-base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   initialLoader,
   initialState,
@@ -44,6 +45,7 @@ import TripSchedule from "./screens/tripSchedule";
 import Subscription from "./screens/subscription";
 import SubscriptionConfirmation from "./screens/subscriptionConfirmation";
 import TripDetails from "./screens/tripDetails";
+import SignIn from "./screens/signIn";
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +69,7 @@ const Root = () => {
           name={routes.signUpSpecialNeeds}
           component={SignUpSpecialNeeds}
         />
+        <Stack.Screen name={routes.signIn} component={SignIn} />
       </Stack.Navigator>
     );
   }
@@ -127,6 +130,13 @@ const App = () => {
 
   const initializeApp = async () => {
     try {
+      const sessionToken = await AsyncStorage.getItem(SESSION_TOKEN);
+      const user = await AsyncStorage.getItem(USER);
+      if (sessionToken) {
+        dispatchState({ type: IS_LOGGED_IN, isLoggedIn: true });
+        dispatchState({ type: SESSION_TOKEN, sessionToken });
+        dispatchState({ type: USER, user: JSON.parse(user) });
+      }
       setIsSplashScreen(false);
     } catch (error) {
       console.error(error);
