@@ -36,7 +36,7 @@ const SignUp = () => {
       }
       loader.show();
       // TODO Send message with code to user phone number
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       loader.hide();
       navigation.navigate(routes.signUpVerification, {
         countryCode,

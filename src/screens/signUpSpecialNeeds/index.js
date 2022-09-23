@@ -8,16 +8,38 @@ import {
   TextArea,
   VStack,
 } from "native-base";
+import { useRoute } from "@react-navigation/native";
 import Container from "../../components/container";
 import translate from "../../translate";
-import { StateContext } from "../../contexts";
+import { LoaderContext, StateContext } from "../../contexts";
+import API, { handleError } from "../../api";
 
 const SignUpSpecialNeeds = () => {
+  const route = useRoute();
+  const { email, password, fullName, phone } = route.params;
   const state = useContext(StateContext);
+  const loader = useContext(LoaderContext);
   const [hasSpecialNeeds, setHasSpecialNeeds] = useState(true);
   const [specialNeeds, setSpecialNeeds] = useState("");
 
-  const onContinue = () => state.updateIsLoggedIn(true);
+  const onContinue = async () => {
+    try {
+      loader.show();
+      await API().post("user/register", {
+        id_universidad: 18,
+        email,
+        password,
+        first_name: fullName,
+        display_name: fullName,
+        phone,
+      });
+      loader.hide();
+      state.updateIsLoggedIn(true);
+    } catch (error) {
+      loader.hide();
+      handleError(error);
+    }
+  };
 
   return (
     <Container>

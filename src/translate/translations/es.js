@@ -17,6 +17,7 @@ export default {
     title: "Código de verificación",
     weSendItTo: "Te lo enviamos al +%{countryCode} %{phone}",
     verificationCode: "Código de verificación",
+    invalidCode: "Código invalido",
     typeTheCodeSent:
       "Escribe el código que te enviamos a tu número de teléfono",
     enter: "Ingresar",

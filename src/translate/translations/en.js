@@ -17,6 +17,7 @@ export default {
     title: "Verification code",
     weSendItTo: "We send it to +%{countryCode} %{phone}",
     verificationCode: "Verification code",
+    invalidCode: "Invalid code",
     typeTheCodeSent: "Type the code we send to your phone number",
     enter: "Sign Up",
   },
