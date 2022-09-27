@@ -8,7 +8,7 @@ import {
   useDisclose,
   VStack,
 } from "native-base";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polyline } from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import database from "@react-native-firebase/database";
 import Share from "react-native-share";
@@ -24,6 +24,8 @@ import LiveLocationModal from "../../components/liveLocationModal";
 import OnTheWay from "../../components/onTheWay";
 import InLocation from "../../components/inLocation";
 import ToDestination from "../../components/toDestination";
+import { decodePolyline } from "../../utils";
+import { GoogleMapsAPI } from "../../api";
 
 const TripInProgress = () => {
   const insets = useSafeAreaInsets();
@@ -39,6 +41,7 @@ const TripInProgress = () => {
     onClose: onCloseLiveLocationModal,
   } = useDisclose(false);
   const [isUserReady, setIsUserReady] = useState(false);
+  const [coordinates, setCoordinates] = useState([]);
 
   const servicioReference = database()
     .ref()
@@ -46,7 +49,20 @@ const TripInProgress = () => {
     .child("servicio")
     .child(String(state.tripInProgress.servicio.id));
 
-  const centerMap = location => map.current.animateCamera({ center: location });
+  const points = [
+    {
+      latitude: 25.821265,
+      longitude: -80.266804,
+    },
+    {
+      latitude: 25.731299,
+      longitude: -80.263028,
+    },
+    {
+      latitude: 25.858036,
+      longitude: -80.224576,
+    },
+  ];
 
   useEffect(() => {
     if (isMapReady) {
@@ -57,8 +73,34 @@ const TripInProgress = () => {
         }
         setLatitude(location.latitude);
         setLongitude(location.longitude);
-        centerMap(location);
+
+        // map.current.animateCamera({ center: location })
       });
+      GoogleMapsAPI.get(
+        `/directions/json?origin=25.771,-80.3252&destination=25.771,-80.3252&waypoints=optimize:true|${points
+          .map(point => `${point.latitude},${point.longitude}`)
+          .join("|")}`,
+      ).then(
+        ({
+          data: {
+            routes: [route],
+          },
+        }) => {
+          if (!route) {
+            console.error("No route found");
+          }
+          console.log(
+            route.legs
+              .map(leg => leg.duration.value)
+              .reduce((total, current) => total + current, 0) / 60,
+            "min",
+          );
+          setCoordinates(decodePolyline(route.overview_polyline.points));
+          map.current.fitToCoordinates(
+            decodePolyline(route.overview_polyline.points),
+          );
+        },
+      );
     }
     return () => {
       servicioReference.child("currentLocation").off();
@@ -83,6 +125,10 @@ const TripInProgress = () => {
               longitude,
             }}
           />
+          {points.map(point => (
+            <Marker key={point.latitude} coordinate={point} />
+          ))}
+          <Polyline coordinates={coordinates} strokeWidth={3} />
         </MapView>
         <Pressable
           position="absolute"
