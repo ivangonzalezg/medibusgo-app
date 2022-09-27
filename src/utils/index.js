@@ -3,6 +3,7 @@ import { PermissionsAndroid, Platform } from "react-native";
 import Geolocation from "react-native-geolocation-service";
 import numbro from "numbro";
 import countries from "./countries.json";
+import decodePolyline from "./decodePolyline";
 
 const noFlag = "⬜";
 
@@ -52,4 +53,5 @@ export {
   getLocationPermission,
   formatToCurrency,
   capitalize,
+  decodePolyline,
 };
