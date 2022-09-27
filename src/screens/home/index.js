@@ -71,7 +71,7 @@ const Home = () => {
 
   useEffect(() => {
     const listeners = [];
-    if (state?.user?.id) {
+    if (state?.sessionToken && state?.user?.id) {
       getSuggestions();
       API(state.sessionToken)
         .get(
@@ -111,7 +111,7 @@ const Home = () => {
     return () => {
       listeners.forEach(listener => listener.off());
     };
-  }, [state.user]);
+  }, [state]);
 
   const getOriginByLocation = async ({ latitude, longitude }) => {
     try {

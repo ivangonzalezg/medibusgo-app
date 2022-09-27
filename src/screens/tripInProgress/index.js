@@ -13,6 +13,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import database from "@react-native-firebase/database";
+import Share from "react-native-share";
 import styles from "./styles";
 import { StateContext } from "../../contexts";
 import constants from "../../constants";
@@ -71,6 +72,8 @@ const TripInProgress = () => {
           ref={map}
           style={styles.map}
           initialRegion={constants.initialRegion}
+          showsUserLocation
+          showsMyLocationButton={false}
           rotateEnabled={false}
           loadingEnabled
           onMapReady={() => setIsMapReady(true)}>
@@ -99,7 +102,13 @@ const TripInProgress = () => {
           borderRadius="full"
           shadow={2}
           px={4}
-          py={2}>
+          py={2}
+          onPress={() =>
+            Share.open({
+              url: "https://hospitaltrack.com/invite_register_ID#4334",
+              failOnCancel: false,
+            })
+          }>
           <HStack space={3}>
             <Image w={4} h={4} source={share} alt="share" />
             <Text color={colors.titleText}>
