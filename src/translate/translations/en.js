@@ -160,6 +160,10 @@ export default {
       "The assistant goes to your location to help you board the transport",
     imReady: "I'm ready",
   },
+  toDestination: {
+    inTheWay: "You are on the way to your destination",
+    youWillArriveAt: "You will arrive at your destination at",
+  },
   liveLocationModal: {
     title: "Share your location in real time",
     subtitle:

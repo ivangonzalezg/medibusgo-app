@@ -23,6 +23,7 @@ import translate from "../../translate";
 import LiveLocationModal from "../../components/liveLocationModal";
 import OnTheWay from "../../components/onTheWay";
 import InLocation from "../../components/inLocation";
+import ToDestination from "../../components/toDestination";
 
 const TripInProgress = () => {
   const insets = useSafeAreaInsets();
@@ -149,10 +150,24 @@ const TripInProgress = () => {
         mt={-5}
         borderTopRadius={20}>
         {/* <OnTheWay plate={state.tripInProgress.servicio.placa_vehiculo} /> */}
-        <InLocation
+        {/* <InLocation
           plate={state.tripInProgress.servicio.placa_vehiculo}
           isUserReady={isUserReady}
           onUserReady={() => setIsUserReady(true)}
+        /> */}
+        <ToDestination
+          origin={
+            state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
+            "SEDE"
+              ? state.tripInProgress.direccion_direccion
+              : state.tripInProgress.servicio.nombre_ubicacion_origen
+          }
+          destination={
+            state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
+            "SEDE"
+              ? state.tripInProgress.servicio.nombre_ubicacion_destino
+              : state.tripInProgress.direccion_direccion
+          }
         />
       </VStack>
       <LiveLocationModal
