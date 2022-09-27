@@ -71,12 +71,12 @@ const stateReducer = (prevState, action) => {
     case IS_TRIP_IN_PROGRESS:
       return {
         ...prevState,
-        isViajeEnCurso: action.isViajeEnCurso,
+        isTripInProgress: action.isTripInProgress,
       };
     case TRIP_IN_PROGRESS:
       return {
         ...prevState,
-        viajeEnCurso: action.viajeEnCurso,
+        tripInProgress: action.tripInProgress,
       };
     case TRIPS: {
       return {

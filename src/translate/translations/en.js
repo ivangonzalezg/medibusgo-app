@@ -136,4 +136,22 @@ export default {
     assistant: "Assistant",
     cancelBooking: "Cancel booking",
   },
+  tripInProgress: {
+    share: "Share ride with contact",
+    transportGoesToLocation: "Transport goes to your location",
+    vehicleType: "White van",
+    plate: "Plate",
+    arriveIn: "Arrive in",
+    tripType: "Trip type",
+    roundTrip: "Round trip",
+    paymentMethod: "Payment method",
+    creditCard: "Credit card",
+    cancel: "Cancel",
+  },
+  liveLocationModal: {
+    title: "Share your location in real time",
+    subtitle:
+      "To improve your PickUp experience activate the location in real time",
+    share: "Share location",
+  },
 };

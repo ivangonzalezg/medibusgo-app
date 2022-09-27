@@ -18,6 +18,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Geolocation from "react-native-geolocation-service";
 import { useNavigation } from "@react-navigation/native";
 import qs from "qs";
+import moment from "moment";
+import database from "@react-native-firebase/database";
 import styles from "./styles";
 import translate, { locale } from "../../translate";
 import constants from "../../constants";
@@ -68,8 +70,48 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getSuggestions();
-  }, []);
+    const listeners = [];
+    if (state?.user?.id) {
+      getSuggestions();
+      API(state.sessionToken)
+        .get(
+          `/airlinku/_table/reserva?filter=(id_usuario=${
+            state.user.id
+          })AND(eliminado is null)AND(estado >= 0)AND(servicio_finalizado = 0)AND(inicio_servicio=${moment().format(
+            "Y-MM-DD",
+          )})`,
+        )
+        .then(({ data: { resource: reservas } }) => {
+          reservas.forEach(reserva => {
+            const reference = database()
+              .ref()
+              .child("airlinku")
+              .child("servicio")
+              .child(String(reserva.servicio.id))
+              .child("estadoServicio");
+            listeners.push(reference);
+            reference.on("value", data => {
+              const estado = data.val();
+              if (!estado) {
+                return;
+              }
+              if (estado === 4) {
+                state.updateIsTripInProgress(false);
+                state.updateTripInProgress({});
+                navigation.navigate(routes.home);
+              } else {
+                state.updateIsTripInProgress(true);
+                state.updateTripInProgress(reserva);
+                navigation.navigate(routes.tripInProgress);
+              }
+            });
+          });
+        });
+    }
+    return () => {
+      listeners.forEach(listener => listener.off());
+    };
+  }, [state.user]);
 
   const getOriginByLocation = async ({ latitude, longitude }) => {
     try {
@@ -103,10 +145,7 @@ const Home = () => {
               longitude: coords.longitude,
             };
             if (Platform.OS === "android") {
-              map.current.animateCamera({
-                center: _location,
-                zoom: 18,
-              });
+              map.current.animateCamera({ center: _location });
             }
             setLocation(_location);
             getOriginByLocation(_location);
@@ -174,7 +213,8 @@ const Home = () => {
           borderRadius="3xl"
           shadow={2}
           py={3}
-          px={6}>
+          px={6}
+          onPress={() => state.updateIsLoggedIn(false)}>
           <HStack>
             <Image w={5} h={5} source={profile} alt="profile" />
             <Text color={colors.primaryDark} ml={2}>

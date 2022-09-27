@@ -137,4 +137,22 @@ export default {
     assistant: "Auxiliar",
     cancelBooking: "Cancelar reserva",
   },
+  tripInProgress: {
+    share: "Compartir viaje con contacto",
+    transportGoesToLocation: "El transporte se dirige a tu ubicación",
+    vehicleType: "Van blanca",
+    plate: "Placa",
+    arriveIn: "Llega en",
+    tripType: "Tipo de viaje",
+    roundTrip: "Viaje con regreso",
+    paymentMethod: "Método de pago",
+    creditCard: "Tarjeta de crédito",
+    cancel: "Cancelar",
+  },
+  liveLocationModal: {
+    title: "Comparte tu ubicación en tiempo real",
+    subtitle:
+      "Para mejorar tu experiencia de PickUp activa la ubicación en tiempo real",
+    share: "Compartir ubicación",
+  },
 };

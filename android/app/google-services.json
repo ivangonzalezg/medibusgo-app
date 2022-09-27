@@ -1,0 +1,233 @@
+{
+  "project_info": {
+    "project_number": "408635736306",
+    "firebase_url": "https://airlink-u-9cd50.firebaseio.com",
+    "project_id": "airlink-u-9cd50",
+    "storage_bucket": "airlink-u-9cd50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408635736306:android:6d6a7f81305ac054",
+        "android_client_info": {
+          "package_name": "com.airlink.technisupport.airlinku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9imXYevHN3hJu2bCDEm8NwzHkjvZRrjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408635736306-ahoq3snk9qfa1l9b92fb5tuagcih7od8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.technisupport.AirlinkU.usuariomx",
+                "app_store_id": "1597335100"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408635736306:android:94311dd0433f0773",
+        "android_client_info": {
+          "package_name": "com.airlink.technisupport.airlinku_conductor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9imXYevHN3hJu2bCDEm8NwzHkjvZRrjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408635736306-ahoq3snk9qfa1l9b92fb5tuagcih7od8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.technisupport.AirlinkU.usuariomx",
+                "app_store_id": "1597335100"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408635736306:android:6fddb887aad39eaa18d06b",
+        "android_client_info": {
+          "package_name": "com.medibusgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9imXYevHN3hJu2bCDEm8NwzHkjvZRrjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408635736306-ahoq3snk9qfa1l9b92fb5tuagcih7od8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.technisupport.AirlinkU.usuariomx",
+                "app_store_id": "1597335100"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408635736306:android:ff0f0ca67ddfd96218d06b",
+        "android_client_info": {
+          "package_name": "com.schoolgoconductor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9imXYevHN3hJu2bCDEm8NwzHkjvZRrjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408635736306-ahoq3snk9qfa1l9b92fb5tuagcih7od8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.technisupport.AirlinkU.usuariomx",
+                "app_store_id": "1597335100"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408635736306:android:aec9b57c5d9f4dd318d06b",
+        "android_client_info": {
+          "package_name": "com.vanana.schoolgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9imXYevHN3hJu2bCDEm8NwzHkjvZRrjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408635736306-ahoq3snk9qfa1l9b92fb5tuagcih7od8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.technisupport.AirlinkU.usuariomx",
+                "app_store_id": "1597335100"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408635736306:android:fb148fd3c55112b918d06b",
+        "android_client_info": {
+          "package_name": "com.vananaconductor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9imXYevHN3hJu2bCDEm8NwzHkjvZRrjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408635736306-idcnao6l9hhfksm7spqs6f7kb4elcp2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408635736306-ahoq3snk9qfa1l9b92fb5tuagcih7od8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.technisupport.AirlinkU.usuariomx",
+                "app_store_id": "1597335100"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

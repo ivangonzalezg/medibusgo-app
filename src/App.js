@@ -40,12 +40,13 @@ import signUpVerification from "./screens/signUpVerification";
 import SignUpAccount from "./screens/signUpAccount";
 import SignUpPassword from "./screens/signUpPassword";
 import SignUpSpecialNeeds from "./screens/signUpSpecialNeeds";
+import SignIn from "./screens/signIn";
 import Home from "./screens/home";
 import TripSchedule from "./screens/tripSchedule";
 import Subscription from "./screens/subscription";
 import SubscriptionConfirmation from "./screens/subscriptionConfirmation";
 import TripDetails from "./screens/tripDetails";
-import SignIn from "./screens/signIn";
+import TripInProgress from "./screens/tripInProgress";
 
 const Stack = createNativeStackNavigator();
 
@@ -86,6 +87,7 @@ const Root = () => {
         component={SubscriptionConfirmation}
       />
       <Stack.Screen name={routes.tripDetails} component={TripDetails} />
+      <Stack.Screen name={routes.tripInProgress} component={TripInProgress} />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );

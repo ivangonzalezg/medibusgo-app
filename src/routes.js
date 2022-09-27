@@ -5,12 +5,13 @@ const routes = {
   signUpAccount: "sign-up-account",
   signUpPassword: "sign-up-password",
   signUpSpecialNeeds: "sign-up-special-needs",
+  signIn: "sign-in",
   home: "home",
   tripSchedule: "trip-schedule",
   subscription: "subscription",
   subscriptionConfirmation: "Subscription-confirmation",
   tripDetails: "trip-details",
-  signIn: "sign-in",
+  tripInProgress: "trip-in-progress",
   test: "test",
 };
 
