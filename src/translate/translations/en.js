@@ -150,7 +150,7 @@ export default {
     creditCard: "Credit card",
     cancel: "Cancel",
   },
-  atDestination: {
+  inLocation: {
     transportHasArrived: "Transport has arrived at your location",
     vehicleType: "White van",
     plate: "Plate",

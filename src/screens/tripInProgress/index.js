@@ -22,7 +22,7 @@ import colors from "../../constants/colors";
 import translate from "../../translate";
 import LiveLocationModal from "../../components/liveLocationModal";
 import OnTheWay from "../../components/onTheWay";
-import AtDestination from "../../components/atDestination";
+import InLocation from "../../components/inLocation";
 
 const TripInProgress = () => {
   const insets = useSafeAreaInsets();
@@ -37,6 +37,7 @@ const TripInProgress = () => {
     onOpen: onOpenLiveLocationModal,
     onClose: onCloseLiveLocationModal,
   } = useDisclose(false);
+  const [isUserReady, setIsUserReady] = useState(false);
 
   const servicioReference = database()
     .ref()
@@ -148,10 +149,10 @@ const TripInProgress = () => {
         mt={-5}
         borderTopRadius={20}>
         {/* <OnTheWay plate={state.tripInProgress.servicio.placa_vehiculo} /> */}
-        <AtDestination
+        <InLocation
           plate={state.tripInProgress.servicio.placa_vehiculo}
-          // isUserReady
-          isUserReady={false}
+          isUserReady={isUserReady}
+          onUserReady={() => setIsUserReady(true)}
         />
       </VStack>
       <LiveLocationModal
