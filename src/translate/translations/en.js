@@ -138,6 +138,8 @@ export default {
   },
   tripInProgress: {
     share: "Share ride with contact",
+  },
+  onTheWay: {
     transportGoesToLocation: "Transport goes to your location",
     vehicleType: "White van",
     plate: "Plate",

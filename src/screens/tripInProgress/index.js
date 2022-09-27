@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
-  Button,
-  Divider,
   HStack,
   Image,
   Pressable,
@@ -18,13 +16,12 @@ import styles from "./styles";
 import { StateContext } from "../../contexts";
 import constants from "../../constants";
 import profile from "../../assets/icons/profile.png";
-import chat from "../../assets/icons/chat.png";
-import vehicle from "../../assets/images/vehicle.png";
 import share from "../../assets/icons/share.png";
 import liveLocation from "../../assets/icons/live-location.png";
 import colors from "../../constants/colors";
 import translate from "../../translate";
 import LiveLocationModal from "../../components/liveLocationModal";
+import OnTheWay from "../../components/onTheWay";
 
 const TripInProgress = () => {
   const insets = useSafeAreaInsets();
@@ -149,65 +146,7 @@ const TripInProgress = () => {
         pb={3}
         mt={-5}
         borderTopRadius={20}>
-        <HStack alignItems="flex-start" space={5} mb={5}>
-          <Text flex={1} fontSize="xl">
-            {translate.t("tripInProgress.transportGoesToLocation")}
-          </Text>
-          <Button size="sm">
-            <HStack space={2}>
-              <Image w={4} h={4} source={chat} alt="chat" />
-              <Text color="white">Chat</Text>
-            </HStack>
-          </Button>
-        </HStack>
-        <HStack mb={5}>
-          <HStack flex={1} space={10}>
-            <Image w={20} h={20} source={vehicle} alt="vehicle" />
-            <VStack>
-              <Text>{translate.t("tripInProgress.vehicleType")}</Text>
-              <Text fontSize="xl">BTA 217</Text>
-              <Text fontSize="lg" color={colors.lighterText}>
-                {translate.t("tripInProgress.plate")}
-              </Text>
-            </VStack>
-          </HStack>
-          <VStack space={3}>
-            <Text>{translate.t("tripInProgress.arriveIn")}</Text>
-            <VStack
-              w={70}
-              h={70}
-              backgroundColor={colors.titleText}
-              borderRadius="full"
-              alignItems="center"
-              justifyContent="center">
-              <Text color="white">4</Text>
-              <Text color="white">min</Text>
-            </VStack>
-          </VStack>
-        </HStack>
-        <Divider />
-        <VStack my={5} space={3}>
-          <HStack space={3}>
-            <Text minW={140}>{translate.t("tripInProgress.tripType")}</Text>
-            <Text color={colors.lighterText}>
-              {translate.t("tripInProgress.roundTrip")}
-            </Text>
-          </HStack>
-          <HStack space={3}>
-            <Text minW={140}>
-              {translate.t("tripInProgress.paymentMethod")}
-            </Text>
-            <Text color={colors.lighterText}>
-              {translate.t("tripInProgress.creditCard")}
-            </Text>
-          </HStack>
-        </VStack>
-        <Divider />
-        <Pressable alignItems="center" mt={3}>
-          <Text color={colors.cancel}>
-            {translate.t("tripInProgress.cancel")}
-          </Text>
-        </Pressable>
+        <OnTheWay plate={state.tripInProgress.servicio.placa_vehiculo} />
       </VStack>
       <LiveLocationModal
         visible={isLiveLocationModal}

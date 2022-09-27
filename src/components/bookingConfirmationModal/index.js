@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import styles from "./styles";
 import check from "../../assets/icons/check.png";
-import card from "../../assets/icons/card.png";
+// import card from "../../assets/icons/card.png";
 import translate from "../../translate";
 
 const BookingConfirmationModal = props => {
