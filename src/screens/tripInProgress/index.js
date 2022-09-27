@@ -22,6 +22,7 @@ import colors from "../../constants/colors";
 import translate from "../../translate";
 import LiveLocationModal from "../../components/liveLocationModal";
 import OnTheWay from "../../components/onTheWay";
+import AtDestination from "../../components/atDestination";
 
 const TripInProgress = () => {
   const insets = useSafeAreaInsets();
@@ -146,7 +147,12 @@ const TripInProgress = () => {
         pb={3}
         mt={-5}
         borderTopRadius={20}>
-        <OnTheWay plate={state.tripInProgress.servicio.placa_vehiculo} />
+        {/* <OnTheWay plate={state.tripInProgress.servicio.placa_vehiculo} /> */}
+        <AtDestination
+          plate={state.tripInProgress.servicio.placa_vehiculo}
+          // isUserReady
+          isUserReady={false}
+        />
       </VStack>
       <LiveLocationModal
         visible={isLiveLocationModal}

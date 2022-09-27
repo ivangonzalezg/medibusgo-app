@@ -151,6 +151,16 @@ export default {
     creditCard: "Tarjeta de crédito",
     cancel: "Cancelar",
   },
+  atDestination: {
+    transportHasArrived: "El transporte ha llegado a tu ubicación",
+    vehicleType: "Van blanca",
+    plate: "Placa",
+    arriveIn: "Llega en",
+    hasArrived: "Ha\r\nllegado",
+    assistantOnTheWay:
+      "El auxiliar se dirige a su ubicación para ayudarlo a subir al transporte",
+    imReady: "Estoy listo",
+  },
   liveLocationModal: {
     title: "Comparte tu ubicación en tiempo real",
     subtitle:

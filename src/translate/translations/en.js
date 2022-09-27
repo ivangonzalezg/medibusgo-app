@@ -150,6 +150,16 @@ export default {
     creditCard: "Credit card",
     cancel: "Cancel",
   },
+  atDestination: {
+    transportHasArrived: "Transport has arrived at your location",
+    vehicleType: "White van",
+    plate: "Plate",
+    arriveIn: "Arrive in",
+    hasArrived: "Has\r\narrived",
+    assistantOnTheWay:
+      "The assistant goes to your location to help you board the transport",
+    imReady: "I'm ready",
+  },
   liveLocationModal: {
     title: "Share your location in real time",
     subtitle:
