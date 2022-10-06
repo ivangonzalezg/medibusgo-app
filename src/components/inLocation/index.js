@@ -7,15 +7,15 @@ import translate from "../../translate";
 import colors from "../../constants/colors";
 
 const InLocation = props => {
-  const { plate, isUserReady, onUserReady } = props;
+  const { plate, isUserReady, onUserReady, onOpenChat } = props;
 
   return (
-    <VStack>
+    <VStack px={5} pt={5} pb={3}>
       <HStack alignItems="flex-start" space={5} mb={5}>
         <Text flex={1} fontSize="xl">
           {translate.t("inLocation.transportHasArrived")}
         </Text>
-        <Button size="sm">
+        <Button size="sm" onPress={onOpenChat}>
           <HStack space={2}>
             <Image w={4} h={4} source={chat} alt="chat" />
             <Text color="white">Chat</Text>
@@ -65,6 +65,7 @@ InLocation.propTypes = {
   plate: PropTypes.string.isRequired,
   isUserReady: PropTypes.bool.isRequired,
   onUserReady: PropTypes.func.isRequired,
+  onOpenChat: PropTypes.func.isRequired,
 };
 
 export default InLocation;

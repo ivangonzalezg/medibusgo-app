@@ -77,6 +77,12 @@ const Root = () => {
               keyboardShouldPersistTaps: "handled",
             },
           },
+          FlatList: {
+            defaultProps: {
+              showsVerticalScrollIndicator: false,
+              keyboardShouldPersistTaps: "handled",
+            },
+          },
           HStack: {
             defaultProps: {
               alignItems: "center",

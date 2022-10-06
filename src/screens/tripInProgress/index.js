@@ -12,6 +12,7 @@ import MapView, { Marker } from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import database from "@react-native-firebase/database";
 import Share from "react-native-share";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { StateContext } from "../../contexts";
 import constants from "../../constants";
@@ -24,8 +25,10 @@ import LiveLocationModal from "../../components/liveLocationModal";
 import OnTheWay from "../../components/onTheWay";
 import InLocation from "../../components/inLocation";
 import ToDestination from "../../components/toDestination";
+import routes from "../../routes";
 
 const TripInProgress = () => {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const state = useContext(StateContext);
   const map = useRef();
@@ -39,6 +42,7 @@ const TripInProgress = () => {
     onClose: onCloseLiveLocationModal,
   } = useDisclose(false);
   const [isUserReady, setIsUserReady] = useState(false);
+  const [step, setStep] = useState(1);
 
   const servicioReference = database()
     .ref()
@@ -64,6 +68,8 @@ const TripInProgress = () => {
       servicioReference.child("currentLocation").off();
     };
   }, [isMapReady]);
+
+  const onOpenChat = () => navigation.navigate(routes.tripInProgressChat, {});
 
   return (
     <VStack flex={1}>
@@ -91,7 +97,8 @@ const TripInProgress = () => {
           bg={colors.white}
           borderRadius="full"
           shadow={2}
-          p={3}>
+          p={3}
+          onPress={() => setStep(step === 3 ? 1 : step + 1)}>
           <Image w={6} h={6} source={profile} alt="profile" />
         </Pressable>
         <Pressable
@@ -140,35 +147,37 @@ const TripInProgress = () => {
           />
         </Pressable>
       </Stack>
-      <VStack
-        bg="white"
-        shadow={2}
-        safeAreaBottom
-        px={5}
-        pt={5}
-        pb={3}
-        mt={-5}
-        borderTopRadius={20}>
-        {/* <OnTheWay plate={state.tripInProgress.servicio.placa_vehiculo} /> */}
-        {/* <InLocation
-          plate={state.tripInProgress.servicio.placa_vehiculo}
-          isUserReady={isUserReady}
-          onUserReady={() => setIsUserReady(true)}
-        /> */}
-        <ToDestination
-          origin={
-            state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
-            "SEDE"
-              ? state.tripInProgress.direccion_direccion
-              : state.tripInProgress.servicio.nombre_ubicacion_origen
-          }
-          destination={
-            state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
-            "SEDE"
-              ? state.tripInProgress.servicio.nombre_ubicacion_destino
-              : state.tripInProgress.direccion_direccion
-          }
-        />
+      <VStack bg="white" shadow={2} safeAreaBottom mt={-5} borderTopRadius={20}>
+        {step === 1 && (
+          <OnTheWay
+            plate={state.tripInProgress.servicio.placa_vehiculo}
+            onOpenChat={onOpenChat}
+          />
+        )}
+        {step === 2 && (
+          <InLocation
+            plate={state.tripInProgress.servicio.placa_vehiculo}
+            isUserReady={isUserReady}
+            onUserReady={() => setIsUserReady(true)}
+            onOpenChat={onOpenChat}
+          />
+        )}
+        {step === 3 && (
+          <ToDestination
+            origin={
+              state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
+              "SEDE"
+                ? state.tripInProgress.direccion_direccion
+                : state.tripInProgress.servicio.nombre_ubicacion_origen
+            }
+            destination={
+              state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
+              "SEDE"
+                ? state.tripInProgress.servicio.nombre_ubicacion_destino
+                : state.tripInProgress.direccion_direccion
+            }
+          />
+        )}
       </VStack>
       <LiveLocationModal
         visible={isLiveLocationModal}

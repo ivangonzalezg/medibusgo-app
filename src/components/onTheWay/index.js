@@ -15,15 +15,15 @@ import translate from "../../translate";
 import colors from "../../constants/colors";
 
 const OnTheWay = props => {
-  const { plate } = props;
+  const { plate, onOpenChat } = props;
 
   return (
-    <VStack>
+    <VStack px={5} pt={5} pb={3}>
       <HStack alignItems="flex-start" space={5} mb={5}>
         <Text flex={1} fontSize="xl">
           {translate.t("onTheWay.transportGoesToLocation")}
         </Text>
-        <Button size="sm">
+        <Button size="sm" onPress={onOpenChat}>
           <HStack space={2}>
             <Image w={4} h={4} source={chat} alt="chat" />
             <Text color="white">Chat</Text>
@@ -80,6 +80,7 @@ const OnTheWay = props => {
 
 OnTheWay.propTypes = {
   plate: PropTypes.string.isRequired,
+  onOpenChat: PropTypes.func.isRequired,
 };
 
 export default OnTheWay;

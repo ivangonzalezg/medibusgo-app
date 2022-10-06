@@ -12,6 +12,7 @@ const routes = {
   subscriptionConfirmation: "Subscription-confirmation",
   tripDetails: "trip-details",
   tripInProgress: "trip-in-progress",
+  tripInProgressChat: "trip-in-progress-chat",
   test: "test",
 };
 

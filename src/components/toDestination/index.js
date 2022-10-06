@@ -11,7 +11,7 @@ const ToDestination = props => {
   const { origin, destination } = props;
 
   return (
-    <VStack>
+    <VStack px={5} pt={5} pb={3}>
       <Text fontSize="xl" mb={5}>
         {translate.t("toDestination.inTheWay")}
       </Text>

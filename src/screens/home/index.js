@@ -111,7 +111,7 @@ const Home = () => {
     return () => {
       listeners.forEach(listener => listener.off());
     };
-  }, [state]);
+  }, [state.sessionToken, state.user]);
 
   const getOriginByLocation = async ({ latitude, longitude }) => {
     try {

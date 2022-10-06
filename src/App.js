@@ -47,6 +47,7 @@ import Subscription from "./screens/subscription";
 import SubscriptionConfirmation from "./screens/subscriptionConfirmation";
 import TripDetails from "./screens/tripDetails";
 import TripInProgress from "./screens/tripInProgress";
+import TripInProgressChat from "./screens/tripInProgressChat";
 
 const Stack = createNativeStackNavigator();
 
@@ -88,6 +89,10 @@ const Root = () => {
       />
       <Stack.Screen name={routes.tripDetails} component={TripDetails} />
       <Stack.Screen name={routes.tripInProgress} component={TripInProgress} />
+      <Stack.Screen
+        name={routes.tripInProgressChat}
+        component={TripInProgressChat}
+      />
       <Stack.Screen name={routes.test} component={Test} />
     </Stack.Navigator>
   );
