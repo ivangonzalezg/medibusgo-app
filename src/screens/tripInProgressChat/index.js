@@ -60,7 +60,6 @@ const TripInProgressChat = () => {
         </Text>
         <FlatList
           ref={flatList}
-          onLayout={() => flatList?.current?.scrollToEnd()}
           onContentSizeChange={() => flatList?.current?.scrollToEnd()}
           data={messages}
           renderItem={({ item }) => (
@@ -78,12 +77,21 @@ const TripInProgressChat = () => {
               <Text color={item.incoming ? "white" : "black"}>
                 {item.message}
               </Text>
-              <Text
-                color={item.incoming ? "white" : "black"}
-                fontSize="xs"
-                textAlign="right">
-                {item.date}
-              </Text>
+              <HStack space={3}>
+                <Text
+                  flex={1}
+                  color={item.incoming ? "white" : "black"}
+                  fontSize="xs"
+                  numberOfLines={1}>
+                  {item.incoming && item.name}
+                </Text>
+                <Text
+                  color={item.incoming ? "white" : "black"}
+                  fontSize="xs"
+                  numberOfLines={1}>
+                  {item.date}
+                </Text>
+              </HStack>
             </VStack>
           )}
           keyExtractor={item => item.id}

@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
+  Box,
   HStack,
   Image,
   Pressable,
+  ScrollView,
   Stack,
   Text,
   useDisclose,
@@ -26,12 +28,16 @@ import OnTheWay from "../../components/onTheWay";
 import InLocation from "../../components/inLocation";
 import ToDestination from "../../components/toDestination";
 import routes from "../../routes";
+import { Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const TripInProgress = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const state = useContext(StateContext);
   const map = useRef();
+  const scrollView = useRef();
   const [isMapReady, setIsMapReady] = useState(false);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -42,7 +48,7 @@ const TripInProgress = () => {
     onClose: onCloseLiveLocationModal,
   } = useDisclose(false);
   const [isUserReady, setIsUserReady] = useState(false);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   const servicioReference = database()
     .ref()
@@ -69,7 +75,7 @@ const TripInProgress = () => {
     };
   }, [isMapReady]);
 
-  const onOpenChat = () => navigation.navigate(routes.tripInProgressChat, {});
+  const onOpenChat = () => navigation.navigate(routes.tripInProgressChat);
 
   return (
     <VStack flex={1}>
@@ -98,7 +104,15 @@ const TripInProgress = () => {
           borderRadius="full"
           shadow={2}
           p={3}
-          onPress={() => setStep(step === 3 ? 1 : step + 1)}>
+          onPress={() => {
+            const _step = step === 2 ? 0 : step + 1;
+            scrollView.current.scrollTo({
+              x: width * _step,
+              y: 0,
+              animated: true,
+            });
+            setStep(_step);
+          }}>
           <Image w={6} h={6} source={profile} alt="profile" />
         </Pressable>
         <Pressable
@@ -148,36 +162,51 @@ const TripInProgress = () => {
         </Pressable>
       </Stack>
       <VStack bg="white" shadow={2} safeAreaBottom mt={-5} borderTopRadius={20}>
-        {step === 1 && (
-          <OnTheWay
-            plate={state.tripInProgress.servicio.placa_vehiculo}
-            onOpenChat={onOpenChat}
-          />
-        )}
-        {step === 2 && (
-          <InLocation
-            plate={state.tripInProgress.servicio.placa_vehiculo}
-            isUserReady={isUserReady}
-            onUserReady={() => setIsUserReady(true)}
-            onOpenChat={onOpenChat}
-          />
-        )}
-        {step === 3 && (
-          <ToDestination
-            origin={
-              state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
-              "SEDE"
-                ? state.tripInProgress.direccion_direccion
-                : state.tripInProgress.servicio.nombre_ubicacion_origen
-            }
-            destination={
-              state.tripInProgress.servicio.nombre_tipo_ubicacion_destino ===
-              "SEDE"
-                ? state.tripInProgress.servicio.nombre_ubicacion_destino
-                : state.tripInProgress.direccion_direccion
-            }
-          />
-        )}
+        <ScrollView
+          ref={scrollView}
+          horizontal
+          decelerationRate={0}
+          snapToInterval={width}
+          snapToAlignment="center"
+          showsHorizontalScrollIndicator={false}
+          scrollEnabled={false}>
+          <Box w={width}>
+            {step === 0 && (
+              <OnTheWay
+                plate={state.tripInProgress.servicio.placa_vehiculo}
+                onOpenChat={onOpenChat}
+              />
+            )}
+          </Box>
+          <Box w={width}>
+            {step === 1 && (
+              <InLocation
+                plate={state.tripInProgress.servicio.placa_vehiculo}
+                isUserReady={isUserReady}
+                onUserReady={() => setIsUserReady(true)}
+                onOpenChat={onOpenChat}
+              />
+            )}
+          </Box>
+          <Box w={width}>
+            {step === 2 && (
+              <ToDestination
+                origin={
+                  state.tripInProgress.servicio
+                    .nombre_tipo_ubicacion_destino === "SEDE"
+                    ? state.tripInProgress.direccion_direccion
+                    : state.tripInProgress.servicio.nombre_ubicacion_origen
+                }
+                destination={
+                  state.tripInProgress.servicio
+                    .nombre_tipo_ubicacion_destino === "SEDE"
+                    ? state.tripInProgress.servicio.nombre_ubicacion_destino
+                    : state.tripInProgress.direccion_direccion
+                }
+              />
+            )}
+          </Box>
+        </ScrollView>
       </VStack>
       <LiveLocationModal
         visible={isLiveLocationModal}
